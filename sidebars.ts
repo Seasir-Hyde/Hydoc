@@ -1,6 +1,35 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs'
 
 const sidebars: SidebarsConfig = {
+  // Blog 侧边栏配置
+  Blog: [
+    {
+      label: '概述',
+      type: 'doc',
+      id: 'Blog/introduction', // 指向 introduction.md
+    },
+    {
+      label: '部署指南',
+      type: 'category',
+      link: {
+        type: 'doc',
+        id: 'Blog/tutorial/index',  // 指向索引页文档的 ID
+      },
+      collapsed: true,  // 默认折叠侧边栏
+      items: [
+        {
+          type: 'doc',
+          id: 'Blog/tutorial/Xiao-ZhangsBlog',
+          label: '小张的个人博客'
+        },
+        {
+          type: 'doc',
+          id: 'Blog/tutorial/ruyu-blog',
+          label: 'ruyu-blog 博客'
+        },
+      ],
+    },
+  ], 
   skill: [
     'skill/introduction',
     {
@@ -319,7 +348,7 @@ const sidebars: SidebarsConfig = {
     'tools/idea-config',
     'tools/vite-plugin',
     'tools/jetbrains-product-activation-method',
-  ],
+  ], 
 }
 
 module.exports = sidebars

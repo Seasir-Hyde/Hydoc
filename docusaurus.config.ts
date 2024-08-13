@@ -8,10 +8,10 @@ const beian = '闽ICP备2020017848号-2'
 const beian1 = '闽公网安备35021102000847号'
 
 const config: Config = {
-  title: '愧怍',
-  url: 'https://kuizuo.cn',
+  title: 'Hydoc的小站',
+  url: 'https://kuizuo.cn',  //网站url
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
   organizationName: 'kuizuo',
   projectName: 'blog',
   customFields: {
@@ -20,6 +20,8 @@ const config: Config = {
       '是一个由愧怍创建的个人博客，主要分享编程开发知识和项目，该网站基于 React 驱动的静态网站生成器 Docusaurus 构建。',
   },
   themeConfig: {
+    // 禁用面包屑导航
+    breadcrumbs: false, 
     // announcementBar: {
     //   id: 'announcementBar-3',
     //   content: ``,
@@ -41,7 +43,10 @@ const config: Config = {
     ],
     docs: {
       sidebar: {
+        // 隐藏侧边栏
         hideable: true,
+        // 自动折叠侧边栏
+        autoCollapseCategories: true,
       },
     },
     navbar: {
@@ -56,6 +61,16 @@ const config: Config = {
         { label: '项目', position: 'right', to: 'project' },
         { label: '友链', position: 'right', to: 'friends' },
         { label: '关于', position: 'right', to: 'about' },
+        {
+          label: '开源项目',
+          to: 'docs/overview', //跳转到概述
+          position: 'left',
+          items: [
+            {label: '小张的个人博客',to: 'docs/Blog/tutorial/Xiao-ZhangsBlog',sidebar: 'blogSidebar', // 使用对应的侧边栏
+            }, 
+            { label: 'ruyu-blog博客', to: 'docs/Blog/tutorial/ruyu-blog' },
+          ],
+        },
         {
           label: '更多',
           position: 'right',
