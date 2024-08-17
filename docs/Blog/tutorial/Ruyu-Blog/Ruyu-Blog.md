@@ -188,12 +188,14 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-创建配置文件
+创建Mysql配置文件
 
 ```bash
 vim /data/mysql/conf/my.cnf
 ```
 
+<details >
+  <summary>点击展开</summary>
 ```bash
 [mysqld]
 default-storage-engine=INNODB  # 创建新表时将使用的默认存储引擎
@@ -233,6 +235,7 @@ default-character-set=utf8mb4
 [client]
 default-character-set=utf8mb4  # 设置mysql客户端默认字符集
 ```
+</details>
 
 ```bash
 #cd到对应目录下
@@ -530,7 +533,8 @@ docker-compose up --force-recreate -d
 ![image-20240812003659349](https://ice.frostsky.com/2024/08/12/311559cea03daaec9d8c535731ce9570.png)
 
 将以下信息填写在Write Policy（图二）
-
+<details >
+  <summary>点击展开</summary>
 ```bash
 {
     "Version": "2012-10-17",
@@ -587,7 +591,7 @@ docker-compose up --force-recreate -d
     ]
 }
 ```
-
+</details>
 ![image-20240811142237847](https://ice.frostsky.com/2024/08/13/bd946bd389ab9688acfd504596537b46.png)
 
 创建密钥
@@ -654,6 +658,8 @@ git clone git@gitee.com:kuailemao/ruyu-blog.git
 
 添加application-dev.yml配置
 
+<details >
+  <summary>点击展开</summary>
 ```bash
 spring:
   security:
@@ -811,6 +817,7 @@ minio:
   # 桶名称
   bucketName: blog
 ```
+</details>
 
 **把上面准备好的环境找到对应的地方配置好各种ip跟端口或者密钥，运行BlogBackendApplication**
 
@@ -869,6 +876,8 @@ pnpm install
 
 打开\ruyu-blog/blog-frontend/kuailemao-blog/目录下的【.env.development】配置文件，填写好对应的配置信息
 
+<details >
+  <summary>点击展开博客前台开发环境配置</summary>
 ```bash
 # 开发环境配置
 NODE_ENV = development
@@ -888,6 +897,7 @@ VITE_MUSIC_SERVE='http://192.168.222.128:3000/'
 # 自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
 VITE_YIYAN_API = ''
 ```
+</details>
 
 ```bash
 pnpm run dev
@@ -910,8 +920,14 @@ pnpm install
 
 打开blog-frontend/kuailemao-admin/配置文件目录下的【.env.development】配置文件，填写好对应的配置信息
 
+<details >
+  <summary>点击展开博客后台开发环境配置</summary>
 ```bash
+# 开发环境
+
+# 代理前缀
 # VITE_APP_BASE_API=/api
+# 后端地址
 VITE_APP_BASE_URL=http://localhost:8088
 VITE_APP_LOAD_ROUTE_WAY=BACKEND
 #minio ip地址+9001上传端口
@@ -919,9 +935,12 @@ VITE_APP_DOMAIN_NAME=http://192.168.222.128:9001
 # VITE_APP_BASE_API_DEV=/dev-api
 # VITE_APP_BASE_URL_DEV=http://localhost:8080
 # The title of your application (string)
+#标题
 VITE_GLOB_APP_TITLE="antdv-pro"
+# 是否显示侧边配置按钮
 VITE_APP_PROD=true
 ```
+</details>
 
 ```shell
 pnpm dev
@@ -949,7 +968,7 @@ pnpm dev
 
 ## 5.1.部署后端
 
-### 5.1.1.项目打包
+### 5.1.1.构建生成jar包
 
 idea运行打包命令
 
@@ -959,12 +978,13 @@ idea运行打包命令
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/d876b54d-88ff-4a8a-a746-080c4982dda6.png)
 
-### 5.1.2.服务器部署
-
-新建文件夹后进入
+### 5.1.2.上传jar包
 
 ```bash
+#新建backend文件夹
 mkdir /blog/backend -p
+
+#进入backend文件夹
 cd /blog/backend
 ```
 
@@ -979,11 +999,14 @@ ls
 ll
 #输出 blog-backend-0.0.1-SNAPSHOT.jar  或者   总用量 91480 -r--------. 1 root root 93672039 8月  11 04:14 blog-backend-0.0.1-SNAPSHOT.jar
 ```
-
+### 5.1.3.创建后端镜像
 新建 Dockerfile
 
 ```bash
+#进入backend文件夹
 cd /blog/backend
+
+#新建Dockerfile文件
 vim Dockerfile
 ```
 
@@ -992,9 +1015,6 @@ vim Dockerfile
 添加好后按下esc，然后输入:wq       退出保存
 
 注意坑！！！填写配置检测前面是不是没有黏贴上，建议用FinalShell自带文本编辑器
-
-cat Dockerfile
-
 
 ```bash
 # 使用官方的OpenJDK 17镜像作为基础镜像
@@ -1015,7 +1035,30 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 ![image-20240812005927275](https://ice.frostsky.com/2024/08/12/31424c01f8ff2059324bc25746a068ad.png)
 
-构建镜像
+### 5.1.4.构建后端镜像
+:::warning
+```bash
+#构建后端镜像前确保镜像已经停止  首次部署请跳过此步骤
+
+#运行后端容器前记得终止掉原来mysql、redis、rabbitmq容器或者直接停止掉所有容器。您可以使用以下命令：
+
+# 停止mysql容器
+docker stop ruyu-blog-hd
+# 停止redis容器
+docker stop redis:7.2.3
+# 停止rabbitmq容器
+docker stop rabbitmq
+
+#或者停止所有正在运行的Docker容器
+docker stop $(docker ps -q)
+
+#删除后端容器
+docker rm ruyu-blog-hd
+```
+:::
+
+![](https://ice.frostsky.com/2024/08/04/1e3660433d36eb57fc8a58de28a317bf.png)
+
 
 ```bash
 docker build . -t ruyu-blog-hd
@@ -1023,34 +1066,40 @@ docker build . -t ruyu-blog-hd
 
 ![image-20240812010004567](https://ice.frostsky.com/2024/08/12/d048d67681d42ca98476d6f302513f59.png)
 
-运行容器
+### 5.1.5.启动后端镜像
+```bash
+docker start ruyu-blog-hd
+```
+
+### 5.1.6.运行后端容器
 
 ```bash
 docker run --name ruyu-blog-hd -d -p 8088:8088 ruyu-blog-hd
 ```
 
 ![image-20240812010159849](https://ice.frostsky.com/2024/08/12/10c99f9dcdd2447731ae1a550938acb1.png)
-
-检查后端容器是否运行成功
-
+### 5.1.7.验证后端容器
 ```bash
 docker ps
 ```
 
-成功输出下图
+成功输出如下图
 
 ![image-20240812010235419](https://ice.frostsky.com/2024/08/12/0c30792630e68845081d06247a165727.png)
 
 **记得服务器防火墙开启对应端口！！！**
 
 ## 5.2.部署前台
-
+### 5.2.1.填写配置文件
+:::tip
+不填写也可以打包到服务器，也可以运行
+:::
 找到 kuailemao-blog 目录下面的生产环境配置文件
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/f37c5b7a-4311-4085-9b68-812d72789fdf.png)
 
-填写前端前台生产环境配置
-
+<details >
+  <summary>点击展开前台生产环境配置</summary>
 ```bash
 # 生产环境配置
 NODE_ENV = production
@@ -1058,20 +1107,21 @@ NODE_ENV = production
 # 博客代理地址
 VITE_APP_BASE_API = '/api'
 # 项目后端地址（来自blog-frontend/kuailemao-admin/.env.development配置文件中VITE_APP_BASE_URL）
-VITE_SERVE='http://localhost:8088/'
+VITE_SERVE='http://服务器IP:8088/'
 # 前台域名（没有配就填写正确ip）
-VITE_FRONTEND_URL = 'http://localhost:99/'
+VITE_FRONTEND_URL = 'http://服务器IP:99/'
 # 音乐代理地址
 VITE_MUSIC_BASE_API = '/wapi'
 # 第三方开源集成的音乐前端地址，如果不配置上面菜单栏就不会出现音乐选项
 VITE_MUSIC_FRONTEND_URL = ''
 # 左下角音乐后端地址
-VITE_MUSIC_SERVE='http://192.168.222.128:3000/'
+VITE_MUSIC_SERVE='http://服务器IP:3000/'
 # 自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
 VITE_YIYAN_API = ''
 ```
+</details>
 
-### 5.2.1.项目**打包**
+### 5.2.1.打包前台项目
 
 运行打包命令
 
@@ -1085,12 +1135,15 @@ pnpm build
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/85008907-98f7-4772-b923-0011613a2461.png)
 
-### 5.2.2.项目部署
+### 5.2.3.上传dist文件夹
 
 回到服务器，运行命令
 
 ```bash
+# 新建blog-qt文件夹
 mkdir /blog/blog-qt -p
+
+# 进入blog-qt文件夹
 cd /blog/blog-qt/
 ```
 
@@ -1100,11 +1153,9 @@ cd /blog/blog-qt/
 rz
 ```
 
-![image-20240811195834377](https://ice.frostsky.com/2024/08/11/2ea4bcaf1e7e26520f6a7995e1a01a1d.png
-
 ![](https://ice.frostsky.com/2024/08/04/367cec9cdc375e35eea7ac91362a0d07.png)
 
-新建 Dockerfile
+### 5.2.4.创建前台镜像
 
 ```bash
 vim Dockerfile
@@ -1126,7 +1177,7 @@ ADD default.conf /etc/nginx/conf.d/
 COPY dist/ /usr/share/nginx/html/
 ```
 
-新建 nginx 配置文件
+新建 default.conf 配置文件
 
 ```bash
 vim default.conf
@@ -1135,7 +1186,8 @@ vim default.conf
 填入配置，添加好后按下esc，然后输入:wq       退出保存
 
 注意坑！！！填写配置检测前面是不是没有黏贴上，建议用FinalShell自带文本编辑器
-
+<details >
+  <summary>点击展开</summary>
 ```bash
 server {
         listen 80;              # 监听端口
@@ -1171,9 +1223,12 @@ server {
         }
     }
 ```
+</details>
 
 如果有域名，并且后台不想使用另外一个端口访问，假如 88，因为服务器只有一个 80端口，就可以使用nginx转发，如下配置
 
+<details >
+  <summary>点击展开</summary>
 ```bash
 # 定义HTTP服务器
     server {
@@ -1224,26 +1279,39 @@ server {
         }
     }
 ```
-
+</details>
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/3eefe4e3-ae52-473d-ab45-5838ed9a4162.png)
 
-构建镜像
+### 5.2.5.构建前台镜像
+
+:::warning
+```bash
+#构建前台镜像前确保镜像已经停止  首次部署请跳过此步骤
+
+#停止前台容器
+docker stop blog-qt
+#删除前台容器
+docker rm blog-qt
+```
+:::
 
 ```bash
-<!-- 导航到这个目录下 -->
+<!-- 导航到/blog/blog-qt/目录下 -->
 cd /blog/blog-qt/
+
+# 构建前台镜像
 docker build . -t blog-qt
 ```
 
 ![image-20240812010345015](https://ice.frostsky.com/2024/08/12/6d3ab5b1a3d186494abb702e8bb8a51c.png)
 
-运行前端前台镜像
+### 5.2.6.运行前台镜像
 
 ```bash
 docker run --name blog-qt -d -p 80:80 blog-qt
 ```
 
-验证是否成功
+### 5.2.7.验证前台容器
 
 ```bash
 docker ps -a
@@ -1261,6 +1329,10 @@ docker ps -a
 
 ## 5.3.部署后台
 
+### 5.3.1.填写配置文件
+:::tip
+不填写也可以打包到服务器，也可以运行
+:::
 找到对应的生产环境配置文件
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/7d7f6d1c-edec-4ef2-bf7e-30ee23e970e4.png)
@@ -1270,13 +1342,13 @@ docker ps -a
 ```bash
 VITE_APP_BASE_API=/api
 #服务器ip+8088端口
-VITE_APP_BASE_URL=http://192.168.222.128:8088
+VITE_APP_BASE_URL=http://服务器IP:8088
 # The title of your application (string)
 VITE_GLOB_APP_TITLE="antdv-pro"
 VITE_APP_PROD=false
 ```
 
-### 5.3.1.项目打包
+### 5.3.2.打包后台项目
 
 打包命令
 
@@ -1290,12 +1362,15 @@ pnpm build
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/aa5a73e8-0f1c-41e2-bc78-78059e938f64.png)
 
-### 5.3.2.后台部署
+### 5.3.3.上传dist目录
 
 回到服务器，运行命令
 
 ```bash
+#新建blog-ht文件夹
 mkdir /blog/blog-ht
+
+#进入blog-ht文件夹
 cd /blog/blog-ht
 ```
 
@@ -1303,14 +1378,36 @@ cd /blog/blog-ht
 
 ![](https://ice.frostsky.com/2024/08/04/367cec9cdc375e35eea7ac91362a0d07.png)
 
-新建 Dockerfile
+### 5.3.4.创建后台镜像
 
 ```bash
 vim Dockerfile
 ```
+填入配置，添加好后按下esc，然后输入:wq 退出保存
 
-填入配置
+注意坑！！！填写配置检测前面是不是没有黏贴上，建议用FinalShell自带文本编辑器
+```bash
+FROM nginx
 
+MAINTAINER 博客后台
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+ADD default.conf /etc/nginx/conf.d/
+
+COPY dist/ /usr/share/nginx/html/
+```
+
+新建 default.conf 配置文件
+
+```bash
+vim default.conf
+```
+
+填入后台nginx配置
+
+<details >
+  <summary>点击展开</summary>
 ```bash
 server {
         listen 81;              # 监听端口
@@ -1346,22 +1443,38 @@ server {
         }
     }
 ```
+</details>
+![](https://image.kuailemao.xyz/blog/article/articleImage/91a09b37-a4c6-45cf-b527-2f1985a573a4.png)
 
-构建后台前端镜像
+### 5.3.5.构建后台镜像
+:::warning
+```bash
+#构建后台镜像前确保镜像已经停止  首次部署请跳过此步骤
+
+#停止后台容器
+docker stop blog-ht
+#删除后台容器
+docker rm blog-ht
+```
+:::
 
 ```bash
+<!-- 导航到/blog/blog-ht目录下 -->
+cd /blog/blog-ht
+
+<!-- 构建后台镜像 -->
 docker build . -t blog-ht
 ```
 
 ![image-20240812010536086](https://ice.frostsky.com/2024/08/12/d714725a3692934e480776219b1d0b87.png)
 
-运行后台前端镜像
+### 5.3.6.运行后台镜像
 
 ```bash
 docker run --name blog-ht -d -p 81:81 blog-ht
 ```
 
-验证是否成功
+### 5.3.7.验证后台镜像
 
 ```bash
 docker ps -a
@@ -1369,329 +1482,5 @@ docker ps -a
 
 ![image-20240812010601490](https://ice.frostsky.com/2024/08/12/625bf631819c9d5283bec75dfe1e7c31.png)
 
-## 6.项目更新部署教程
-
-## 部署后端
-
-### 1. 构建生成jar包
-
-```bash
-#进入指定目录
-cd /root/ruyu-blog/blog-backend
-
-# 删除项目的 target 目录
-mvn clean
-```
-
-![](https://ice.frostsky.com/2024/08/04/f83e4f5bb69940f2a7bca943863165f3.png)
-
-```bash
-cd /root/ruyu-blog/blog-backend
-# 打包后端生成jar包
-mvn clean package
-```
-
-![](https://ice.frostsky.com/2024/08/04/f1a6cf01743c78a8e5ba001d83cd50c8.png)
-
-可以看到，成功生成jar包！**也可以在虚拟机目录下看到生成的jar包，路径在：/root/ruyu-blog/blog-backend/target**
-![](https://ice.frostsky.com/2024/08/04/233ed02f8fad14d236171ba8dafad101.png)
-
-### 2. 生成docker镜像
-
-```bash
-cd /root/ruyu-blog/blog-backend
-vim Dockerfile
-```
-
-**写入Dockerfile内容配置：(覆盖掉原来文件的内容)**
-cat Dockerfile
-
-```bash
-# 使用官方的OpenJDK 17镜像作为基础镜像
-FROM openjdk:17
-
-# 设置工作目录
-WORKDIR /app
-
-# 复制项目的jar文件到容器中
-COPY target/blog-backend-0.0.1-SNAPSHOT.jar /app/app.jar
-
-# 暴露应用运行的端口
-EXPOSE 8088
-
-# 运行Spring Boot应用
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
-```
-
-### 3. 停止容器
-
-运行后端容器前记得终止掉原来mysql、redis、rabbitmq容器或者直接停止掉所有容器
-您可以使用以下命令：
-
-```bash
-# 停止mysql容器
-docker stop ruyu-blog-hd
-# 停止redis容器
-docker stop redis:7.2.3
-# 停止rabbitmq容器
-docker stop rabbitmq
-
-#或者停止所有正在运行的Docker容器
-docker stop $(docker ps -q)
-```
-
-![](https://ice.frostsky.com/2024/08/04/1e3660433d36eb57fc8a58de28a317bf.png)
-
-### 4. 删除后端容器
-
-```bash
-docker rm ruyu-blog-hd
-```
-
-### 5. 构建镜像
-
-```bash
-docker build . -t ruyu-blog-hd
-docker images
-```
-
-![](https://ice.frostsky.com/2024/08/04/1fe1b41e2d5a72f5defbabf2753a8750.png)
-
-### 6. 运行容器
-
-```bash
-docker run --name ruyu-blog-hd -d -p 8088:8088 ruyu-blog-hd
-```
-
-### 7. 一键启动所有容器
-
-```bash
-docker start $(docker ps -aq)
-```
-
-### 8. 验证正在运行的容器
-
-```bash
-docker ps -a
-```
-
-![](https://ice.frostsky.com/2024/08/04/1fe1b41e2d5a72f5defbabf2753a8750.png)
-
-## 部署前端
-
-### 1.回到服务器，运行命令
-
-```bash
-mkdir /blog/blog-qt
-```
-
-```bash
-cd /blog/blog-qt/
-```
-
-### 2.打包前端dist目录
-
-2.1把打包好的dist整个文件夹目录上传到/blog/blog-qt目录下
-![](https://ice.frostsky.com/2024/08/04/367cec9cdc375e35eea7ac91362a0d07.png)
-
-2.2把windows本地打包好的 dist 文件夹进行压缩，然后通过rz命令上传，不能上传整个dist整个目录，不然报错！
-
-```bash
-rz
-```
-
-如果提示没有rz先去安装下
-
-```bash
-sudo yum install lrzsz
-```
-
-验证rz 是否已成功安装
-
-```bash
-rz --version
-```
-
-![](https://ice.frostsky.com/2024/08/04/ec9c9f00754a2c8a97a901651676383a.png)
-
-### 3.新建 Dockerfile文件
-
-```bash
-<!-- 导航到这个目录下，如果之前新建过可跳过此步骤哦！！！ -->
-cd /blog/blog-qt/
-<!-- 新建 Dockerfile文件 -->
-vim Dockerfile
-```
-
-### 4.填入配置
-
-如果之前填入过可跳过此步骤哦！！！
-
-```bash
-FROM nginx
-
-MAINTAINER 博客前台
-
-RUN rm /etc/nginx/conf.d/default.conf
-
-ADD default.conf /etc/nginx/conf.d/
-
-COPY dist/ /usr/share/nginx/html/
-```
-
-### 5.新建 nginx 配置文件
-
-```bash
-vim default.conf
-```
-
-#### 5.1填入nginx配置
-
-```bash
-server {
-        listen 80;              # 监听端口
-
-        server_name localhost;    # 域名
-
-        location / {
-             root   /usr/share/nginx/html;
-             index  index.html index.htm;
-             try_files $uri $uri/ /index.html =404;
-        }
-
-        # 配置代理路径
-        location /api/ {
-            proxy_pass http://192.168.80.128:8088/;        # 转发请求的目标地址
-            proxy_set_header Host $host;             # 设置请求头中的Host字段
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                            # 设置HTTP头中的X-Forwarded-For字段，表示客户端真实IP，多个IP用逗号隔开
-            proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
-            client_max_body_size 100M;
-        }
-
-        # 配置代理路径
-        location /wapi/ {
-            proxy_pass http://192.168.80.128:3000/;        # 转发请求的目标地址
-        }
-
-        # 配置错误页面
-        error_page 404 /404.html;           # 404错误页
-        location = /404.html {
-            internal;                       # 不接受外部访问
-            root /usr/share/nginx/html;     # 404错误页文件所在目录
-        }
-    }
-```
-
-如果有域名，并且后台不想使用另外一个端口访问，假如 88，因为服务器只有一个 80端口，就可以使用nginx转发，如下配置
-
-```bash
-# 定义HTTP服务器
-    server {
-        listen 80;              # 监听端口
-
-        server_name kuailemao.xyz;    # 域名
-
-        location / {
-             root   /usr/share/nginx/html;
-             index  index.html index.htm;
-             try_files $uri $uri/ /index.html =404;
-        }
-
-        # 配置代理路径
-        location /api/ {
-            proxy_pass http://[域名/ip+端口]/;        # 转发请求的目标地址，项目后端
-            proxy_set_header Host $host;             # 设置请求头中的Host字段
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                            # 设置HTTP头中的X-Forwarded-For字段，表示客户端真实IP，多个IP用逗号隔开
-            proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
-        }
-
-        # 配置代理路径
-        location /wapi/ {
-            proxy_pass http://[域名/ip+端口]/;        # 转发请求的目标地址，音乐后端
-        }
-
-        # 配置错误页面
-        error_page 404 /404.html;           # 404错误页
-        location = /404.html {
-            internal;                       # 不接受外部访问
-            root /usr/share/nginx/html;     # 404错误页文件所在目录
-        }
-    }
-
-    # 二级域名反向代理，访问后台
-    server {
-        listen 80;
-        server_name blog.kuailemao.xyz;
-
-        location / {
-            proxy_pass http://kuailemao.xyz:81/; # 实际的后台路径
-            client_max_body_size 100M;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
-    }
-```
-使用第二种方法记得服务器那边也要解析二级域名！！！
-
-![](https://ice.frostsky.com/2024/08/04/17ea69e8379752f3de9d2796b4d6e743.png)
-
-### 6.构建镜像
-
-```bash
-<!-- 导航到这个目录下 -->
-cd /blog/blog-qt/
-docker build . -t blog-qt
-```
-
-![](https://ice.frostsky.com/2024/08/04/86fcc9464ee9b3231af5f2bc33351448.png)
-
-运行
-
-```bash
-docker run --name blog-qt -d -p 80:80 blog-qt
-```
-
-![](https://ice.frostsky.com/2024/08/04/58fb7bd8048677c0e400b7e8587e57ad.png)
-<u>**如果构建镜像出现上图所示：说明你尝试启动的容器名称 /blog-qt 已经被另一个容器占用。要解决这个问题，你可以执行以下操作：**</u>
-
-#### 6.1 查看现有容器
-
-首先，查看当前所有容器，包括已停止的容器：这将列出所有容器，包括它们的状态和名称。
-
-```bash
-docker ps -a
-```
-
-#### 6.2 停止并删除现有容器
-
-如果现有容器不再需要，你可以停止并删除它：
-
-```bash
-<!-- 停止容器名称 -->
-docker stop blog-qt
-
-<!-- 删除容器 -->
-docker rm blog-qt
-```
-
-#### 6.3 重新运行容器
-
-```bash
-docker run --name blog-qt -d -p 80:80 blog-qt
-```
-
-#### 6.4验证是否成功
-
-```bash
-docker ps
-```
-
-![](https://ice.frostsky.com/2024/08/04/32cb76664a7b246a6e3e18af0b911f5e.png)
-
-前台效果
-![](https://ice.frostsky.com/2024/08/04/a8545b66a20e60af769bb7f7221fca2c.png)
-
+后台效果
+![](https://image.kuailemao.xyz/blog/article/articleImage/3bb39afd-00bb-44f3-9211-b4b65c75d8a4.png)
