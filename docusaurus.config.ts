@@ -66,7 +66,7 @@ const config: Config = {
           to: 'docs/overview', //跳转到概述
           position: 'left',
           items: [
-            {label: '小张的个人博客',to: 'docs/Blog/tutorial/Xiao-ZhangsBlog',sidebar: 'blogSidebar', // 使用对应的侧边栏
+            {label: '小张的个人博客',to: 'docs/Blog/tutorial/BT/Detailed',sidebar: 'blogSidebar', // 使用对应的侧边栏
             }, 
             { label: 'ruyu-blog博客', to: 'docs/Blog/tutorial/ruyu-blog' },
           ],
