@@ -34,6 +34,11 @@ const sidebars: SidebarsConfig = {
               id: 'Blog/tutorial/Ruyu-Blog/Ruyu-Blog',
               label: 'Ruyu-Blog V1.3.2'
             },
+            {
+              type: 'doc',
+              id: 'Blog/tutorial/Ruyu-Blog/hitokoto',
+              label: 'hitokoto'
+            },
           ],
         }
       ],
