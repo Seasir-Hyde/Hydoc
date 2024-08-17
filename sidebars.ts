@@ -9,7 +9,7 @@ const sidebars: SidebarsConfig = {
       id: 'Blog/introduction', // 指向 introduction.md
     },
     {
-      label: '部署指南',
+      label: 'Blog部署指南',
       type: 'category',
       link: {
         type: 'doc',
@@ -17,16 +17,25 @@ const sidebars: SidebarsConfig = {
       },
       collapsed: true,  // 默认折叠侧边栏
       items: [
+
         {
-          type: 'doc',
-          id: 'Blog/tutorial/Xiao-ZhangsBlog',
-          label: '小张的个人博客'
+          小张的个人博客: [
+            {
+              type: 'doc',
+              id: 'Blog/tutorial/BT/Detailed',
+              label: '宝塔详细版'
+            }
+          ],
         },
         {
-          type: 'doc',
-          id: 'Blog/tutorial/ruyu-blog',
-          label: 'ruyu-blog 博客'
-        },
+          全网最美博客: [
+            {
+              type: 'doc',
+              id: 'Blog/tutorial/Ruyu-Blog/Ruyu-Blog',
+              label: 'Ruyu-Blog V1.3.2'
+            },
+          ],
+        }
       ],
     },
   ], 
