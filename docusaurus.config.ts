@@ -52,7 +52,7 @@ const config: Config = {
     navbar: {
       logo: {
         alt: '愧怍',
-        src: 'img/logo.webp',
+        src: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
         srcDark: 'img/logo.webp',
       },
       hideOnScroll: true,
