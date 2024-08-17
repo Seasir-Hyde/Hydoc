@@ -46,7 +46,7 @@ import TabItem from '@theme/TabItem';
 部分内容引用[One大佬](https://wiki.onedayxyy.cn/blog)的教程，感谢大佬的贡献。
 :::
 
-## 环境
+## 环境要求
 
 :::note
 docker环境
@@ -130,7 +130,7 @@ remote_sentences_url: https://cdn.jsdelivr.net/gh/hitokoto-osc/sentences-bundle@
 
 
 
-## 5.创建 `docker-compose.yml`文件
+## 5.创建 docker-compose.yml 文件
 
 ```bash
 vim docker-compose.yml

@@ -39,6 +39,11 @@ const sidebars: SidebarsConfig = {
               id: 'Blog/tutorial/Ruyu-Blog/hitokoto',
               label: 'hitokoto'
             },
+            {
+              type: 'doc',
+              id: 'Blog/tutorial/Ruyu-Blog/Music-module',
+              label: 'Music module'
+            }
           ],
         }
       ],

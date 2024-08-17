@@ -623,7 +623,7 @@ docker run -p 3000:3000 --name netease_cloud_music_api -d binaryify/netease_clou
 ## 1.7.部署一言接口
 
 :::info
-详情部署请点击：[docker部署一言接口服务](https://hydoc.netlify.appdocs/Blog/tutorial/Ruyu-Blog/hitokoto)
+详情部署请点击：[docker部署一言接口服务](https://hydoc.netlify.app/docs/Blog/tutorial/Ruyu-Blog/hitokoto)
 :::
 
 ## 4.1.拉取项目
@@ -954,9 +954,11 @@ pnpm dev
 
 ### 4.3.3.音乐模块（可选）
 
-开源地址：https://github.com/XiangZi7/KM-Music-Player
+:::info
+这个页面是单独部署的并非集成在项目内，需要的自己参考开源大佬的文档部署
 
-> 这个页面是单独部署的并非集成在项目内，需要的自己参考开源大佬的文档部署
+详情部署请点击：[音乐模块(可选)](https://hydoc.netlify.app/docs/Blog/tutorial/Ruyu-Blog/Music-module)
+:::
 
 ![img](https://image.kuailemao.xyz/blog/article/articleImage/56edb3d9-5efb-4969-885b-7a8fff2111c1.png)
 
