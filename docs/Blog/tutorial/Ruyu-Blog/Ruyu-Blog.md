@@ -622,11 +622,111 @@ docker run -p 3000:3000 --name netease_cloud_music_api -d binaryify/netease_clou
 
 ## 1.7.部署一言接口
 
+:::tip
+
 可选，ruyu-blog原作者官网的一言接口有qps限制，想使用流畅一点就自己部署一个
 
-官方部署文档：https://developer.hitokoto.cn/sentence/deploy.html
+「一言」官方部署文档：https://developer.hitokoto.cn/sentence/deploy.html
 
-**一言官方提供了各种部署方式，自己选一个，官网使用 `Docker` 部署**
+「一言」官网：[https://hitokoto.cn/](https://hitokoto.cn/)
+
+在线 API 地址：[https://v1.hitokoto.cn/](https://v1.hitokoto.cn/)
+
+API 文档：[https://developer.hitokoto.cn/]
+
+**一言官方提供了各种部署方式，自己选一个，这里使用 `Docker` 部署**
+
+:::
+
+```bash
+#创建hitokoto目录
+mkdir -p hitokoto
+
+#进入hitokoto目录
+cd hitokoto
+```
+
+创建「一言」的配置文件
+
+```bash
+vim config.yml
+```
+
+填写config.yml的配置
+
+```bash
+name: 'hitokoto' # 服务名称，例如：hitokoto  [必填！]
+url: '您的IP:8000' # 服务地址，例如：https://v1.hitokoto.cn  [必填！]
+api_name: 'demo_api_name' # 服务表示，例如：cd-01-demo  [必填！]
+server: # 配置 HTTP 服务的信息
+  host: hitokoto_api # 监听的地址，因为我们采用 docker-compose 启动，因此设置为 service 名称即可  [必填！]
+  port: '8000' # 监听的端口  [必填！]
+  compress_body: true # 是否使用 GZIP 压缩
+redis: # 配置 Redis
+  host: hitokoto_db # Redis 主机名，因为我们采用 docker-compose 启动，因此设置为 service 名称即可  [必填！]
+  port: 6379 # Redis 端口  [必填！]
+  password: '' # Redis 密码  [必填！]
+  database: 0 # Redis 数据库索引，通常使用 0 号数据库
+sentences_ab_switcher: # 本节是服务 AB 异步更新的配置，这是获取语句库的远程地址，除非有特殊需求，通常不需要修改保持默认！
+  a: 1 # a 状态对应的 redis 数据库
+  b: 2 # b 状态对应的 redis 数据库
+remote_sentences_url: https://cdn.jsdelivr.net/gh/hitokoto-osc/sentences-bundle@latest/ # 语句库地址，通常默认即可。如果您想使用您自己打包部署的语句库，您可以修改此项
+```
+
+![image-20240817185213677](https://ice.frostsky.com/2024/08/17/399e11e5303a75e8748da5a03be18081.png)
+
+创建 `docker-compose.yml`
+
+```bash
+vim docker-compose.yml
+```
+
+```bash
+version: "3.8"  # Docker Compose 文件的版本
+
+services:
+  # Redis 服务
+  hitokoto_db:
+    image: redis:6.0.8  # 使用 Redis 6.0.8 镜像
+    # 可以添加更多 Redis 配置项，例如环境变量、持久化等
+
+  # Hitokoto API 服务
+  hitokoto_api:
+    image: hitokoto/api  # 使用 Hitokoto API 镜像
+    ports:
+      - 8000:8000  # 将容器的 8000 端口映射到主机的 8000 端口
+    depends_on:
+      - hitokoto_db  # 确保 hitokoto_api 在 hitokoto_db 启动后启动
+    volumes:
+      - ./config.yml:/usr/src/app/data/config.yml:ro  # 将主机的 config.yml 文件挂载到容器中的指定路径，并以只读模式挂载
+    # 可以添加更多配置项，例如环境变量、启动命令等
+```
+
+![image-20240817185527696](https://ice.frostsky.com/2024/08/17/fe1d98d3997f5737bcf4d80a1ed04895.png)
+
+运行一言容器
+
+```bash
+docker-compose up
+```
+
+效果测试
+
+浏览器输入ip+8000端口是否成功返回
+
+![image-20240817190357101](https://ice.frostsky.com/2024/08/17/a8b86001ec56052486e55e142419d424.png)
+
+最后在 ruyu-blog\blog-frontend\kuailemao-blog\.env.development或者.env.production配置文件中填写您的ip+端口
+
+```bash
+# 开发环境配置
+NODE_ENV = development
+...
+# 自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
+VITE_YIYAN_API = 'http://您的IP:8000/'
+```
+
+![image-20240817190659438](https://ice.frostsky.com/2024/08/17/20f1899efb59f95a86879b11543df2f3.png)
 
 # 4.本地运行项目
 
@@ -1193,13 +1293,13 @@ server {
         listen 80;              # 监听端口
 
         server_name localhost;    # 域名
-
+    
         location / {
              root   /usr/share/nginx/html;
              index  index.html index.htm;
              try_files $uri $uri/ /index.html =404;
         }
-
+    
         # 配置代理路径
         location /api/ {
             proxy_pass http://192.168.222.128:8088/;        # 转发请求的目标地址
@@ -1209,12 +1309,12 @@ server {
             proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
             client_max_body_size 100M;
         }
-
+    
         # 配置代理路径
         location /wapi/ {
             proxy_pass http://192.168.222.128:3000/;        # 转发请求的目标地址
         }
-
+    
         # 配置错误页面
         error_page 404 /404.html;           # 404错误页
         location = /404.html {
@@ -1413,13 +1513,13 @@ server {
         listen 81;              # 监听端口
 
         server_name localhost;    # 域名
-
+    
         location / {
              root   /usr/share/nginx/html;
              index  index.html index.htm;
              try_files $uri $uri/ /index.html =404;
         }
-
+    
         # 配置代理路径
         location /api/ {
             proxy_pass http://192.168.222.128:8088/;        # 转发请求的目标地址
@@ -1429,12 +1529,12 @@ server {
             proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
             client_max_body_size 100M;
         }
-
+    
         # 配置代理路径
         location /wapi/ {
             proxy_pass http://192.168.222.128:3000/;        # 转发请求的目标地址
         }
-
+    
         # 配置错误页面
         error_page 404 /404.html;           # 404错误页
         location = /404.html {
