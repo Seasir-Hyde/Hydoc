@@ -49,9 +49,9 @@ import TabItem from '@theme/TabItem';
 ## 环境要求
 
 :::note
-docker环境
+环境：docker
 
-centos7.x机器
+操作系统：centos7.x
 
 redis 6.x
 :::
@@ -142,12 +142,15 @@ vim docker-compose.yml
 version: "3.8"  # Docker Compose 文件的版本
 
 services:
-  # Redis 服务
+  # Redis 服务配置
   hitokoto_db:
     image: redis:6.0.8  # 使用 Redis 6.0.8 镜像
+    restart: always  # 配置开机自启动
     # 可以添加更多 Redis 配置项，例如环境变量、持久化等
+    # volumes:
+    #   - ./data:/data  # 将主机的 ./data 目录挂载到容器的 /data 目录，以便持久化 Redis 数据
 
-  # Hitokoto API 服务
+  # Hitokoto API 服务配置
   hitokoto_api:
     image: hitokoto/api  # 使用 Hitokoto API 镜像
     ports:
@@ -156,6 +159,7 @@ services:
       - hitokoto_db  # 确保 hitokoto_api 在 hitokoto_db 启动后启动
     volumes:
       - ./config.yml:/usr/src/app/data/config.yml:ro  # 将主机的 config.yml 文件挂载到容器中的指定路径，并以只读模式挂载
+    restart: always  # 配置开机自启动
     # 可以添加更多配置项，例如环境变量、启动命令等
 ```
 
@@ -208,9 +212,23 @@ VITE_MUSIC_SERVE='http://192.168.80.128:3000/'
 VITE_YIYAN_API = 'http://192.168.80.128:8000/'
 ```
 
+## 9.设置自启动
 
+```bash
+# 进入hitokoto目录
+cd hitokoto
 
-## 9.效果预览
+#创建自启动脚本
+docker-compose up -d
+
+#输出
+[+] Building 0.0s (0/0)                                                                                                                     docker:default
+[+] Running 2/0
+ ✔ Container hitokoto-hitokoto_db-1   Running                                                                                                         0.0s 
+ ✔ Container hitokoto-hitokoto_api-1  Running                                                                                                         0.0s 
+```
+
+## 10.效果预览
 
 ![](https://ice.frostsky.com/2024/08/17/20f1899efb59f95a86879b11543df2f3.png)
 

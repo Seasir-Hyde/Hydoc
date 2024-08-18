@@ -205,29 +205,42 @@ socket          = /var/run/mysqld/mysqld.sock # 用于本地连接的socket套�
 datadir         = /var/lib/mysql              # 数据文件存放的目录
 symbolic-links=0
 sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION # 定义mysql应该支持的sql语法，数据校验等!
+允许最大连接数
 
-# 允许最大连接数
 max_connections=200
 
+同一局域网内注意要唯一
 
-# 同一局域网内注意要唯一
 server-id=3306
-# 开启二进制日志功能 & 日志位置存放位置`/var/lib/mysql`
+
+开启二进制日志功能 & 日志位置存放位置`/var/lib/mysql`
+
 #log-bin=mysql-bin
 log-bin=/var/lib/mysql/mysql-bin
-# binlog格式
-# 1. STATEMENT：基于SQL语句的模式，binlog 数据量小，但是某些语句和函数在复制过程可能导致数据不一致甚至出错；
-# 2. MIXED：混合模式，根据语句来选用是 STATEMENT 还是 ROW 模式；
-# 3. ROW：基于行的模式，记录的是行的完整变化。安全，但 binlog 会比其他两种模式大很多；
+
+binlog格式
+
+1. STATEMENT：基于SQL语句的模式，binlog 数据量小，但是某些语句和函数在复制过程可能导致数据不一致甚至出错；
+
+2. MIXED：混合模式，根据语句来选用是 STATEMENT 还是 ROW 模式；
+
+3. ROW：基于行的模式，记录的是行的完整变化。安全，但 binlog 会比其他两种模式大很多；
+
 binlog_format=ROW
-# FULL：binlog记录每一行的完整变更 MINIMAL：只记录影响后的行
+
+FULL：binlog记录每一行的完整变更 MINIMAL：只记录影响后的行
+
 binlog_row_image=FULL
-# 日志文件大小
+
+日志文件大小
+
 max_binlog_size=100M
-# 定义清除过期日志的时间(这里设置为7天)
+
+定义清除过期日志的时间(这里设置为7天)
+
 expire_logs_days=7
 
-# ================= ↑↑↑ mysql主从同步配置end ↑↑↑ =================
+================= ↑↑↑ mysql主从同步配置end ↑↑↑ =================
 
 [mysql]
 default-character-set=utf8mb4
@@ -626,6 +639,10 @@ docker run -p 3000:3000 --name netease_cloud_music_api -d binaryify/netease_clou
 详情部署请点击：[docker部署一言接口服务](https://hydoc.netlify.app/docs/Blog/tutorial/Ruyu-Blog/hitokoto)
 :::
 
+## 2.申请第三方登录
+
+### 2.1.Gitee
+
 ## 4.1.拉取项目
 
 项目地址：[kuailemao/Ruyu-Blog](https://gitee.com/kuailemao/ruyu-blog)
@@ -877,20 +894,32 @@ pnpm install
 ```bash
 # 开发环境配置
 NODE_ENV = development
+博客代理地址
 
-# 博客代理地址
 VITE_APP_BASE_API = '/api'
-# 项目后端地址（来自blog-frontend/kuailemao-admin/.env.development配置文件中VITE_APP_BASE_URL）
+
+项目后端地址（来自blog-frontend/kuailemao-admin/.env.development配置文件中VITE_APP_BASE_URL）
+
 VITE_SERVE='http://localhost:8088/'
-# 前台域名
+
+前台域名
+
 VITE_FRONTEND_URL = 'http://localhost:99/'
-# 音乐代理地址
+
+音乐代理地址
+
 VITE_MUSIC_BASE_API = '/wapi'
-# 第三方开源集成的音乐前端地址，如果不配置上面菜单栏就不会出现音乐选项
+
+第三方开源集成的音乐前端地址，如果不配置上面菜单栏就不会出现音乐选项
+
 VITE_MUSIC_FRONTEND_URL = ''
-# 左下角音乐后台
+
+左下角音乐后台
+
 VITE_MUSIC_SERVE='http://192.168.222.128:3000/'
-# 自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
+
+自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
+
 VITE_YIYAN_API = ''
 ```
 </details>
@@ -920,20 +949,28 @@ pnpm install
   <summary>点击展开博客后台开发环境配置</summary>
 ```bash
 # 开发环境
+代理前缀
 
-# 代理前缀
-# VITE_APP_BASE_API=/api
-# 后端地址
+VITE_APP_BASE_API=/api
+
+后端地址
+
 VITE_APP_BASE_URL=http://localhost:8088
 VITE_APP_LOAD_ROUTE_WAY=BACKEND
 #minio ip地址+9001上传端口
 VITE_APP_DOMAIN_NAME=http://192.168.222.128:9001
-# VITE_APP_BASE_API_DEV=/dev-api
-# VITE_APP_BASE_URL_DEV=http://localhost:8080
-# The title of your application (string)
+
+VITE_APP_BASE_API_DEV=/dev-api
+
+VITE_APP_BASE_URL_DEV=http://localhost:8080
+
+The title of your application (string)
+
 #标题
 VITE_GLOB_APP_TITLE="antdv-pro"
-# 是否显示侧边配置按钮
+
+是否显示侧边配置按钮
+
 VITE_APP_PROD=true
 ```
 </details>
@@ -1101,20 +1138,32 @@ docker ps
 ```bash
 # 生产环境配置
 NODE_ENV = production
+博客代理地址
 
-# 博客代理地址
 VITE_APP_BASE_API = '/api'
-# 项目后端地址（来自blog-frontend/kuailemao-admin/.env.development配置文件中VITE_APP_BASE_URL）
+
+项目后端地址（来自blog-frontend/kuailemao-admin/.env.development配置文件中VITE_APP_BASE_URL）
+
 VITE_SERVE='http://服务器IP:8088/'
-# 前台域名（没有配就填写正确ip）
+
+前台域名（没有配就填写正确ip）
+
 VITE_FRONTEND_URL = 'http://服务器IP:99/'
-# 音乐代理地址
+
+音乐代理地址
+
 VITE_MUSIC_BASE_API = '/wapi'
-# 第三方开源集成的音乐前端地址，如果不配置上面菜单栏就不会出现音乐选项
+
+第三方开源集成的音乐前端地址，如果不配置上面菜单栏就不会出现音乐选项
+
 VITE_MUSIC_FRONTEND_URL = ''
-# 左下角音乐后端地址
+
+左下角音乐后端地址
+
 VITE_MUSIC_SERVE='http://服务器IP:3000/'
-# 自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
+
+自己部署的一言接口，如果不填写会默认使用官网的接口，官网接口有每分钟qps限制，有时会得不到想要的结果
+
 VITE_YIYAN_API = ''
 ```
 </details>

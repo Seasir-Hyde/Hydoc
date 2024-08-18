@@ -43,6 +43,11 @@ const sidebars: SidebarsConfig = {
               type: 'doc',
               id: 'Blog/tutorial/Ruyu-Blog/Music-module',
               label: 'Music module'
+            },
+            {
+              type: 'doc',
+              id: 'Blog/tutorial/Ruyu-Blog/Gitee',
+              label: 'Gitee'
             }
           ],
         }
