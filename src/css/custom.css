@@ -222,6 +222,8 @@ article p > span > a {
 
   .navbar-sidebar {
     display: block;
+    /* 移动端侧边栏高度 */
+    height: 932px; 
   }
 }
 
