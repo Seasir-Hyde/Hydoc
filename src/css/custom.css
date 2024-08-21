@@ -176,12 +176,22 @@ article p > span > a {
 }
 
 .navbar {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   background-color: hsla(0, 0%, 100%, 0.2);
   box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.102),
     0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
   opacity: 1;
+   /* 添加过渡动画 */
+   transition: backdrop-filter 0.5s linear, background-color 0.5s linear, box-shadow 0.5s linear, opacity 0.5s linear;
+}
+.navbar.scrolled {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background-color: hsla(0, 0%, 100%, 0.5);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2),
+    0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
 }
 
 .navbar-sidebar__items {
@@ -224,7 +234,10 @@ article p > span > a {
     height: 100vh; /* 移动端侧边栏高度,高度为视口高度的 100% */
   }
 }
-
+.navbar-sidebar__backdrop{
+  /* 移动端侧边栏背景色,背景色为透明 */
+  background-color: rgba(0, 0, 0, 0);
+}
 code {
   color: var(--ifm-code-color);
 }
