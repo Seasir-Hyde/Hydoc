@@ -189,14 +189,6 @@ article p > span > a {
   transition: backdrop-filter 0.5s linear, background-color 0.5s linear,
     box-shadow 0.5s linear, opacity 0.5s linear;
 }
-.navbar.scrolled {
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  background-color: hsla(0, 0%, 100%, 0.5);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2),
-    0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
-  opacity: 1;
-}
 
 .navbar-sidebar__items {
   height: calc(100% - var(--ifm-navbar-height) - 444px);
