@@ -12,7 +12,7 @@ const config: Config = {
   url: 'https://kuizuo.cn',  //网站url
   baseUrl: '/',
   favicon: 'img/favicon.svg',
-  organizationName: 'kuizuo',
+  organizationName: 'Hyde',
   projectName: 'blog',
   customFields: {
     bio: '道阻且长，行则将至',
