@@ -27,6 +27,17 @@ const config: Config = {
     //   content: ``,
     // },
     image: 'img/og.png',
+
+    // 顶部公共栏
+    announcementBar: {
+      id: 'support_us',
+      content:
+        '欢迎访问我的网站👋这里将会持续更新，感谢关注~',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: true,
+    },
+
     metadata: [
       {
         name: 'author',
@@ -51,39 +62,76 @@ const config: Config = {
     },
     navbar: {
       logo: {
-        alt: '愧怍',
+        alt: 'Hyde',
+        // 亮色模式下头像logo
         src: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
-        srcDark: 'img/logo.webp',
+        // 暗色模式下头像logo
+        srcDark: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
       },
       hideOnScroll: true,
       items: [
-        { label: '博客', position: 'right', to: 'blog' },
-        { label: '项目', position: 'right', to: 'project' },
-        { label: '友链', position: 'right', to: 'friends' },
-        { label: '关于', position: 'right', to: 'about' },
+        { label: '🏡 Home', position: 'left', to: '/', },
         {
-          label: '开源项目',
-          to: 'docs/overview', //跳转到概述
-          position: 'left',
+          label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
-            {label: '小张的个人博客',to: 'docs/Blog/tutorial/BT/Detailed',sidebar: 'blogSidebar', // 使用对应的侧边栏
-            }, 
-            { label: 'ruyu-blog博客', to: 'docs/Blog/tutorial/ruyu-blog' },
+            { label: '🖥️ 手记', to: 'docs/overview',},
+            { label: '🌐 文稿', to: 'docs/Stack/',},
+            { label:'🛠️ 专栏', to: 'docs/tools/',
+            },
           ],
         },
         {
-          label: '更多',
+          label: '📖 Blog',
+          position: 'left',
+          // to: '/Hello-Blog',
+          items: [
+            { label: '📕 文稿&分类', to: 'blog' ,},
+            { label: '⏰ 时间轴', to: 'blog/archive' ,},
+          ],
+        },
+        {
+          label: '📸 Life Style',
+          position: 'left',
+          to: '#',
+          items: [
+            { label: '🐺 Wild Wolf', to: 'docs/WildWolf/',},
+            { label: '✨ 生活指南', to: 'docs/LifeGuide/',},
+            { label: '🖥 效率指北', to: 'docs/EfficiencyGuide/',},
+          ],
+        },
+        {
+          label: '🎵 Album Music',
+          position: 'left',
+          to: '#',
+          items: [
+            { label: '🖼️ 时光', to: 'docs/WildWolf/',},
+            { label: '🎧 音乐', to: 'docs/LifeGuide/',},
+          ],
+        },
+        {
+          label: '🔗 Links',
+          to: '#',
           position: 'right',
           items: [
-            { label: '归档', to: 'blog/archive' },
-            { label: '笔记', to: 'docs/skill' },
-            { label: '工具推荐', to: 'docs/tools' },
+            { label: '🗺️ 友链', to: 'friends' },
+            { label: '🌐 导航', to: 'https://google.com', },
+            { label: '🚀 关于',  to: 'about' },
           ],
         },
-        // {
-        //   type: 'localeDropdown',
-        //   position: 'right',
-        // },
+        {
+          label: '🗃️ Project',
+          to: 'project', //跳转到项目
+          position: 'left',
+          items: [
+            { label: '📋 项目', to: 'project', },
+            { label: '🧰 工具推荐', to: 'docs/tools' },
+          ],
+        },
+        // 导航栏的语言下拉选择栏
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
       ],
     },
     // 页脚

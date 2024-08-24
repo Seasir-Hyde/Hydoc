@@ -1,10 +1,10 @@
 export const projects: Project[] = [
   {
-    title: '愧怍的小站',
+    title: 'Hydoc的小站',
     description: '🦖 基于 Docusaurus 静态网站生成器实现个人博客',
     preview: '/img/project/blog.png',
-    website: 'https://kuizuo.cn',
-    source: 'https://github.com/kuizuo/blog',
+    website: 'https://hydoc.netlify.app/',
+    source: 'https://github.com/Seasir-Hyde/Hydoc',
     tags: ['opensource', 'design', 'favorite'],
     type: 'web',
   },

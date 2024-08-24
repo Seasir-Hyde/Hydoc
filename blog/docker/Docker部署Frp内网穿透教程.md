@@ -18,7 +18,7 @@ tags: [随笔, docker，frp，内网穿透]
 keywords: [随笔, docker，frp，内网穿透]
 
 # 文档的简要描述
-description: 这篇文章分享了作者在一家 AI 公司入职一个月的心得和体会，包括工作中的挑战与成长。
+description: 部署一个内网穿透工具，以便可以从外部访问我的内网设备
 
 # 文章的封面图片
 image: https://pic.netbian.com/uploads/allimg/240709/181400-1720520040848c.jpg
