@@ -76,7 +76,7 @@ const config: Config = {
           label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
             { label: '🖥️ 手记', to: 'docs/overview', },
-            { label: '🌐 文稿', to: 'docs/Stack/', },
+            { label: '🌐 Docusaurus ', to: 'docs/skill/', },
             {
               label: '🛠️ 专栏', to: 'docs/tools/',
             },
