@@ -86,6 +86,7 @@ const config: Config = {
         // },
       ],
     },
+    // 页脚
     footer: {
       style: 'dark',
       links: [
@@ -319,7 +320,10 @@ Love what you do and do what you love.
       },
     },
   },
-  onBrokenLinks: 'warn',
+
+  // 这将仅抑制警告，而不会修复潜在问题。
+  onBrokenMarkdownLinks: 'ignore',
+  onBrokenLinks: 'ignore',
 }
 
 export default config

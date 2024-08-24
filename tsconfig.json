@@ -25,7 +25,6 @@
     "importsNotUsedAsValues": "remove",
     "moduleResolution": "Bundler",
     "skipLibCheck": false,
-    "types": ["jest"]
   },
   "exclude": ["src/sw.js"]
 }
