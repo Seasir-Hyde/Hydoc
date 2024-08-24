@@ -345,7 +345,6 @@ const config: Config = {
         },
       }
     },
-    require.resolve('./src/plugins/lastUpdated'), // 自定义插件
   ],
   headTags: [
     {
