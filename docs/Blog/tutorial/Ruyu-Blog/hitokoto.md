@@ -228,7 +228,7 @@ docker-compose up -d
  ✔ Container hitokoto-hitokoto_api-1  Running                                                                                                         0.0s 
 ```
 
-## 10.效果预览
+## 10.效果展示
 
 ![](https://ice.frostsky.com/2024/08/17/20f1899efb59f95a86879b11543df2f3.png)
 

@@ -6,7 +6,7 @@ slug: docker-install-frp
 title: Docker部署Frp内网穿透教程
 
 # 发布日期，用于时间排序
-date: 2024-08-22
+date: 2024-08-24
 
 # 作者名称
 authors: Hyde
@@ -30,6 +30,15 @@ sticky: 1
 今天在腾讯云秒杀活动中，成功以首年38元的价格抢购了一台 2 核 2 G的云服务器，这是针对新用户的特价。由于博客配置最低 2 核 4 G的配置，为了更好地利用这台服务器，决定部署一个内网穿透工具，以便我可以从外部访问我的内网设备。由于之前大佬踩坑的经验，选择了 Frp 作为内网穿透工具。接下来，我将分享我的部署过程。
 
 <!-- truncate -->
+## 版权声明
+
+:::warning
+本教程参考了One作者的教程，并结合自身实际部署过程中积累的经验编写而成。原始教程链接为[实战：docker式部署frp内网穿透-2024.7.13(测试成功)](https://wiki.onedayxyy.cn/blog/docker-install-frp/)，感谢原作者提供的宝贵参考资料。
+
+本教程仅供学习和交流使用，任何人不得将本教程的内容用于商业用途。如需引用或转载，请务必注明原作者及本文出处。如侵权之处，请联系博主进行删除，谢谢~
+
+部分内容引用[One大佬](https://wiki.onedayxyy.cn/blog)的教程，感谢大佬的贡献。
+:::
 
 ## 什么是 frp？
 FRP（Fast Reverse Proxy）是一款开源的高性能内网穿透工具，它允许你将内网服务器暴露到公网，实现外部访问。FRP 的工作原理是通过在内网和外网各部署一个代理服务，使得外部请求能够通过外网代理转发到内网服务，从而解决了内网环境下的访问问题。
@@ -72,6 +81,7 @@ https://github.com/fatedier/frp/releases
 :::info[环境]
 - 1台公网服务器（centos7.x系统）
 - 1台电脑虚拟机（centos7.x系统）
+- Docker和Docker Engine
 
 #frp镜像：
 - registry.cn-shenzhen.aliyuncs.com/mogublog_business/frps:latest
@@ -79,5 +89,207 @@ https://github.com/fatedier/frp/releases
 
 #配置
 - frp server:
-- 阿里云ecs，2核(vCPU)，2 GiB，公网带宽3 Mbps，40GiB ESSD Entry云盘（2120 IOPS）
-  :::
+- 腾讯云ecs，CPU - 2核 内存 - 2GB SSD - 40GB 流量包 - 200GB/月（带宽：3Mbps）
+:::
+
+## 1.安装Docker
+
+首先来云服务器安装服务端，服务端需要在具有公网 IP 的设备上进行安装，我目前的云服务器是装了 **CentOS 7.6 64bit** 系统。（是linux系统就好）
+
+安装步骤详情查看[ruyu-blog部署详细教程)](https://hydoc.netlify.app/docs/Blog/tutorial/ruyu-blog#11%E5%AE%89%E8%A3%85docker)中的1.1.安装Docker和1.1.1安装 Docker Engine(遇到选择一路按y回车)
+
+## 2.安装服务端
+
+- 使用远程连接工具连接到云服务器，然后使用下面的命令，创建 **frp** 的服务端配置文件
+
+```bash
+vim /root/frps.ini
+```
+
+- 填写frp服务端配置信息，这里会启动两个端口号
+
+- **7000**：用于和内网设备数据交互；
+- **7500**：提供 **frp** 图形化界面，同时需要配置面板访问的账号和密码，以及 **token** 是内网设备和 **frp** 服务端建立连接时的密码。
+
+```bash
+[common]
+# 监听端口
+bind_port = 7000
+# 面板端口
+dashboard_port = 7500
+# 登录面板账号设置
+dashboard_user = admin
+# 登录面板的密码
+dashboard_pwd = 123456
+
+# 身份验证
+token = 123456  #随便填写无要求
+```
+
+- 启动容器
+
+使用下面 **docker** 命令，下载我们的 frp 服务端。其中，这里使用到了蘑菇的阿里云镜像仓库地址，官方的镜像地址因为被墙的原因，可能很多小伙伴目前无法访问了。
+
+```bash
+docker run --restart=always --network host -d -v /root/frps.ini:/etc/frp/frps.ini --name frps registry.cn-shenzhen.aliyuncs.com/mogublog_business/frps
+```
+:::tip[提示]
+细心的小伙伴，可能会发现：命令行中使用了 --network host 定网络模式为 host 模式。
+
+众所周知，Docker 使用了 Linux 的 Namespaces 技术来进行资源隔离，如PID Namespace隔离进程，Mount Namespace隔离文件系统，Network Namespace隔离网络等。一个Network Namespace提供了一份独立的网络环境，包括网卡、路由、Iptable 规则等都与其他的 Network Namespace 隔离。
+
+如果使用 host 模式时，容器中的应用都直接绑定在宿主机的端口上，没有经过 NAT 转换，但容器的其他如文件系统等还是隔离的。
+:::
+
+- 查看容器运行状态
+
+```bash
+docker ps
+```
+
+- 输出：
+
+```bash
+CONTAINER ID   IMAGE                                                      COMMAND                   CREATED        STATUS        PORTS     NAMES
+12c1f6d8df8e   registry.cn-shenzhen.aliyuncs.com/mogublog_business/frps   "/bin/sh -c '/usr/bi…"   40 hours ago   Up 40 hours             frps
+```
+
+![image-20240824123227953](https://ice.frostsky.com/2024/08/24/c4b911b0644fcb9559a79532a9d4f580.png)
+
+- 登录web查看后台:http://IP:7500/ --------------------**这里的IP实际换成您自己云服务器的IP**
+
+同时，**frp** 还提供了图形化的界面，我们使用 http://your_ip:7500 即可打开对应的图形化界面。输入上面配置文件中，配置的账号和密码登录即可。
+
+![img](https://onedayxyy.cn/images/640-1720748249460-10.png)
+
+如果能看到下面的页面，说明就我们的服务端就安装成功了
+
+![image-20240713062222592](https://onedayxyy.cn/images/image-20240713062222592.png)
+
+## 3.客户端安装
+
+客户端需要在我们的内网的机器上进行安装,打开内网机器之前，先使用 **SSH** 工具进行连接。
+
+- 创建 **frp** 的客户端配置文件
+
+```bash
+vim /root/frpc.ini
+```
+
+- 填写客户端配置
+
+```bash
+[common]
+# 云服务器的IP地址，FRP客户端连接到此地址
+server_addr = xxx.xxx.xxx.xxx
+
+# 服务端监听的端口，FRP客户端将连接此端口
+server_port = 7000
+
+# 服务端设置的token，用于客户端与服务端之间的身份验证
+token = 123456
+
+
+[ruyu-blog-qt]
+# 代理的类型，这里是TCP代理
+type = tcp
+
+# 本地应用的IP地址，FRP客户端会从这里转发流量
+local_ip = 127.0.0.1
+
+# 本地应用的端口，FRP客户端会将请求转发到这个端口
+local_port = 80
+
+# 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
+remote_port = 8083
+
+
+[ruyu-blog-ht]
+# 代理的类型，这里是TCP代理
+type = tcp
+
+# 本地应用的IP地址，FRP客户端会从这里转发流量
+local_ip = 127.0.0.1
+
+# 本地应用的端口，FRP客户端会将请求转发到这个端口
+local_port = 81
+
+# 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
+remote_port = 8084
+
+
+[ruyu-hitokoto]
+# 代理的类型，这里是TCP代理
+type = tcp
+
+# 本地应用的IP地址，这里是一个内网地址，FRP客户端会从这里转发流量
+local_ip = 192.168.80.128
+
+# 本地应用的端口，FRP客户端会将请求转发到这个端口
+local_port = 8000
+
+# 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
+remote_port = 8085
+```
+
+- 启动容器
+
+配置完成后，依次执行下面命令下载客户端的 docker 镜像，并加载上面的配置文件，启动 **frp** 的客户端。
+
+```bash
+# 运行 FRP 客户端的 Docker 容器
+docker run --restart=always --network host -d -v /root/frpc.ini:/etc/frp/frpc.ini --name frpc registry.cn-shenzhen.aliyuncs.com/mogublog_business/frpc
+
+# 运行 Nginx 的 Docker 容器
+docker run -d  -p 81:80 --name=web --restart=always nginx
+```
+
+![image-20240713104737686](https://onedayxyy.cn/images/image-20240713104737686.png)
+
+- 验证
+
+我们再打开 **frp** 的图形化界面，选中：**Proxies → TCP**，可以看到这几个端口都已经注册上来了
+
+![image-20240713104808493](https://onedayxyy.cn/images/image-20240713104808493.png)
+
+![image-20240713103756614](https://onedayxyy.cn/images/image-20240713103756614.png)
+
+## 4.效果展示
+
+访问公网 IP 的8083端口，即可看到本地虚拟机部署的页面。http://IP:8083/
+
+![alt text](https://ice.frostsky.com/2024/08/18/249883c85ae91abb55f97b4982741af0.png)
+
+## 5.删除Proxies/TCP
+
+首先在内网客户端使用**Xftp 7**远程连接，进入 `/root/frps.ini`文件路径双击打开，并找到需要删除的代理项，然后保存退出。
+
+```bash
+[nginx-test]
+type = http
+local_port = 80
+remote_port = 8080
+...
+
+[ruyu-blog]
+type = tcp
+local_port = 81
+remote_port = 8081
+...
+
+[ssh]
+type = tcp
+local_port = 22
+remote_port = 8022
+...
+```
+
+为了使配置更改生效，您需要在云服务器重启 FRP 服务端。如果您是在 Docker 中运行的 FRP 服务端，可以使用以下命令
+
+```bash
+docker restart frps
+```
+
+验证代理项已删除
+
+![image-20240824131350884](https://ice.frostsky.com/2024/08/24/c954e2d251d32427dc51baab638a595f.png)
