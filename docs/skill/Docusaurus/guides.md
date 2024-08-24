@@ -3,7 +3,7 @@ id: Docusaurus-guides
 slug: /Docusaurus-guides
 title: Docusaurus 养成记录
 authors: Hyde
-date: 204/02/24
+date: 2024/02/24
 last_update:
   date: 2024-08-24
 keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
@@ -13,8 +13,8 @@ keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
 
 - 对于博客框架底层的东西我也不是专业的，我的搭建的过程可以说是一通胡乱摸索，但是所记录的文档均是我运行成功的，可放心食用（如果有版本改动不一定适用）
 
-- 如果遇到了和我不一样的情况，或者参考了我的步骤达不到预期效果，不要慌，要有耐心，要善于利用搜索引擎
-ceq
+- 如果遇到了和我不一样的情况，或者参考了我的步骤达不到预期效果，不要慌，要有耐心，要善于利用搜索引擎！！！
+
 **👇 建议多翻阅文官文档，或许会有你需要的答案**
 
 <!-- 用于侧边栏类别生成的索引页 -->
