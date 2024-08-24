@@ -16,12 +16,13 @@ const config: Config = {
   projectName: 'blog',
   customFields: {
     bio: '道阻且长，行则将至',
+    // 站点描述
     description:
-      '是一个由愧怍创建的个人博客，主要分享编程开发知识和项目，该网站基于 React 驱动的静态网站生成器 Docusaurus 构建。',
+      '该网站基于 React 驱动的静态网站生成器 Docusaurus 构建。由愧怍进行二次魔改，Hyed在愧怍进行二次修改',
   },
   themeConfig: {
     // 禁用面包屑导航
-    breadcrumbs: false, 
+    breadcrumbs: false,
     // announcementBar: {
     //   id: 'announcementBar-3',
     //   content: ``,
@@ -74,9 +75,10 @@ const config: Config = {
         {
           label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
-            { label: '🖥️ 手记', to: 'docs/overview',},
-            { label: '🌐 文稿', to: 'docs/Stack/',},
-            { label:'🛠️ 专栏', to: 'docs/tools/',
+            { label: '🖥️ 手记', to: 'docs/overview', },
+            { label: '🌐 文稿', to: 'docs/Stack/', },
+            {
+              label: '🛠️ 专栏', to: 'docs/tools/',
             },
           ],
         },
@@ -85,8 +87,8 @@ const config: Config = {
           position: 'left',
           // to: '/Hello-Blog',
           items: [
-            { label: '📕 文稿&分类', to: 'blog' ,},
-            { label: '⏰ 时间轴', to: 'blog/archive' ,},
+            { label: '📕 文稿&分类', to: 'blog', },
+            { label: '⏰ 时间轴', to: 'blog/archive', },
           ],
         },
         {
@@ -94,9 +96,9 @@ const config: Config = {
           position: 'left',
           to: '#',
           items: [
-            { label: '🐺 Wild Wolf', to: 'docs/WildWolf/',},
-            { label: '✨ 生活指南', to: 'docs/LifeGuide/',},
-            { label: '🖥 效率指北', to: 'docs/EfficiencyGuide/',},
+            { label: '🐺 Wild Wolf', to: 'docs/WildWolf/', },
+            { label: '✨ 生活指南', to: 'docs/LifeGuide/', },
+            { label: '🖥 效率指北', to: 'docs/EfficiencyGuide/', },
           ],
         },
         {
@@ -104,8 +106,8 @@ const config: Config = {
           position: 'left',
           to: '#',
           items: [
-            { label: '🖼️ 时光', to: 'docs/WildWolf/',},
-            { label: '🎧 音乐', to: 'docs/LifeGuide/',},
+            { label: '🖼️ 时光', to: 'docs/WildWolf/', },
+            { label: '🎧 音乐', to: 'docs/LifeGuide/', },
           ],
         },
         {
@@ -115,7 +117,7 @@ const config: Config = {
           items: [
             { label: '🗺️ 友链', to: 'friends' },
             { label: '🌐 导航', to: 'https://google.com', },
-            { label: '🚀 关于',  to: 'about' },
+            { label: '🚀 关于', to: 'about' },
           ],
         },
         {
@@ -184,8 +186,7 @@ const config: Config = {
       ],
       copyright: `
         <p style="margin-bottom: 0;"><a href="http://beian.miit.gov.cn/">${beian}</a></p>
-        <p style="display: inline-flex; align-items: center;"><img style="height:20px;margin-right: 0.5rem;" src="/img/police.png" alt="police" height="20"/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${
-          beian1.match(/\d+/)?.[0]
+        <p style="display: inline-flex; align-items: center;"><img style="height:20px;margin-right: 0.5rem;" src="/img/police.png" alt="police" height="20"/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${beian1.match(/\d+/)?.[0]
         }" >${beian1}</a></p>
         <p>Copyright © 2020 - ${new Date().getFullYear()} kuizuo. | Built with Docusaurus.</p>
         `,
@@ -321,23 +322,23 @@ const config: Config = {
                 tagName: 'script',
                 innerHTML: `
     (${function () {
-      console.log(
-        `%c Kz Blog %c https://github.com/kuizuo/blog`,
-        'color: #fff; margin: 1em 0; padding: 5px 0; background: #12affa;',
-        'margin: 1em 0; padding: 5px 0; background: #efefef;',
-      )
+                    console.log(
+                      `%c Hyde Blog %c https://github.com/Seasir-Hyde/Hydoc`,
+                      'color: #fff; margin: 1em 0; padding: 5px 0; background: #12affa;',
+                      'margin: 1em 0; padding: 5px 0; background: #efefef;',
+                    )
 
-      const motto = `
-This Webisite Powered By Kz Blog.
-Written by Docusaurus, Coding with Love.
---------
-Love what you do and do what you love.
-`
+                    const motto = `
+                      This Webisite Powered By Kz Blog.
+                      Written by Docusaurus, Coding with Love.
+                      --------
+                      Love what you do and do what you love.
+                      `
 
-      if (document.firstChild?.nodeType !== Node.COMMENT_NODE) {
-        document.prepend(document.createComment(motto))
-      }
-    }.toString()})();`,
+                    if (document.firstChild?.nodeType !== Node.COMMENT_NODE) {
+                      document.prepend(document.createComment(motto))
+                    }
+                  }.toString()})();`,
               },
             ],
           }
