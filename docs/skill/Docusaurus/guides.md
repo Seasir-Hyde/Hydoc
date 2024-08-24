@@ -4,8 +4,7 @@ slug: /Docusaurus-guides
 title: Docusaurus 养成记录
 authors: Hyde
 date: 204/02/24
-last_update:
-  date: 2023/01/21
+lastUpdated: 2024-09-24
 keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
 ---
 
@@ -15,7 +14,7 @@ keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
 
 - 如果遇到了和我不一样的情况，或者参考了我的步骤达不到预期效果，不要慌，要有耐心，要善于利用搜索引擎
 
-测试最后更新时间312321321：
+ces
 
 **👇 建议多翻阅文官文档，或许会有你需要的答案**
 
