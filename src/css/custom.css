@@ -335,3 +335,18 @@ div[class^="announcementBar_"] {
   top: 100%;
   transform: scaleY(-0.5);
 }
+
+/* 侧边栏左侧线条 */
+.menu__list .menu__list {
+  border-bottom: 2px solid #ced9e3;
+  border-bottom-color: #ffffff00!important;
+  border-left: 2px solid #ced9e3;
+  border-radius: 0 0 0 10px;
+  margin-left: 1rem;
+  padding-left: 0.3rem;
+}
+
+html[data-theme='dark'] .menu__list .menu__list{
+  border-bottom: 2px solid #615e5e;
+  border-left: 2px solid #615e5e;
+}

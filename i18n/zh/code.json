@@ -203,7 +203,7 @@
     "description": "The label used to navigate to the previous doc"
   },
   "theme.docs.paginator.next": {
-    "message": "下一页",
+    "message": "下一篇",
     "description": "The label used to navigate to the next doc"
   },
   "theme.DocSidebarItem.toggleCollapsedCategoryAriaLabel": {
