@@ -1,3 +1,30 @@
+---
+# 文档ID，唯一标识符
+id: Docusaurus-NavFilter
+
+# 文档的URL路径标识符，用于生成文档URL
+slug: /Docusaurus-NavFilter
+
+# 文档标题，显示在页面标题
+title: NavFilter模糊
+
+# 发布日期，用于时间排序
+date: 2024/08/24
+
+# 作者名称
+authors: Hyde
+
+# 最后更新日期，用于时间排序
+last_update:
+  date: 2024/08/24
+
+# 关键词，用于SEO优化
+keywords: [docusaurus]
+
+# 文章标签，帮助分类
+tags: [随笔, docker，frp，内网穿透]
+---
+
 # navbar导航栏模糊
 
 ## 添加模糊代码
@@ -18,8 +45,6 @@
 }
 ```
 
-
-
 ## 解决移动端布局侧边栏高度自适应
 
 ```css
@@ -32,8 +57,6 @@
 }
 ```
 
-
-
 ## 可选
 
 ```css
@@ -42,4 +65,3 @@
   background-color: rgba(0, 0, 0, 0);
 }
 ```
-

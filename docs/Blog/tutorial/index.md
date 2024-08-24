@@ -1,7 +1,7 @@
 ---
 id: index
 title: 博客项目部署指南
-authors: hxx
+authors: Hyde
 keywords: ['guides', 'docusaurus', 'docusaurus-guides']
 ---
 

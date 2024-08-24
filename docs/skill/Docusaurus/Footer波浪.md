@@ -1,3 +1,112 @@
+---
+# 文档ID，唯一标识符
+id: Docusaurus-Footer
+
+# 文档的URL路径标识符，用于生成文档URL
+slug: /Docusaurus-Footer
+
+# 文档标题，显示在页面标题
+title: Footer波浪效果
+
+# 发布日期，用于时间排序
+date: 2024/08/24
+
+# 作者名称
+authors: Hyde
+
+# 最后更新日期，用于时间排序
+last_update:
+  date: 2024/08/24
+
+# 关键词，用于SEO优化
+keywords: [docusaurus]
+
+# 文章标签，帮助分类
+tags: [随笔, Footer，波浪]
+---
+
+## 1.创建文件夹
+
+在src\theme\Footer路径下新建Footer文件夹
+
+## 2.创建文件
+
+在Footer文件夹分别创建index.tsx和styles.module.css文件,并填写以下配置代码
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="ts" label="tsx">
+
+```ts
+import React from 'react';
+
+import {useThemeConfig} from '@docusaurus/theme-common';
+import FooterLinks from '@theme/Footer/Links';
+import FooterLogo from '@theme/Footer/Logo';
+import FooterCopyright from '@theme/Footer/Copyright';
+import FooterLayout from '@theme/Footer/Layout';
+
+import styles from './styles.module.css'
+
+function Footer(): JSX.Element | null {
+  // 获取主题配置
+  const {footer} = useThemeConfig();
+  // 如果没有配置footer，则返回null
+  if (!footer) {
+    return null;
+  }
+  // 获取footer配置
+  const {copyright, links, logo, style} = footer;
+
+  return (
+    <>
+    <div className={styles.header} >
+      <div className={styles.innerheader}>
+    </div>
+    <div>
+      <svg className={styles.waves} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g className={styles.parallax}>
+          <use xlinkHref="#gentle-wave" x="48" y="0" />
+          <use xlinkHref="#gentle-wave" x="48" y="3" />
+          <use xlinkHref="#gentle-wave" x="48" y="5" />
+          <use xlinkHref="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    </div>
+    {/* <div className={styles.content}>
+      <span>Shake's Blog</span>
+    </div> */}
+    <FooterLayout
+
+    
+
+      // 设置样式
+      style={style}
+      // 如果links存在且长度大于0，则渲染FooterLinks组件
+      links={links && links.length > 0 && <FooterLinks links={links} />}
+      // 如果logo存在，则渲染FooterLogo组件
+      logo={logo && <FooterLogo logo={logo} />}
+      // 如果copyright存在，则渲染FooterCopyright组件
+      copyright={copyright && <FooterCopyright copyright={copyright} />}
+    />
+    </>
+  );
+}
+
+export default React.memo(Footer);
+```
+
+</TabItem>
+<TabItem value="css" label="css">
+
+```css
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
 body {
@@ -132,3 +241,8 @@ html[data-theme='dark'] .parallax > use:nth-child(4) {
     font-size:24px;
   }
 }
+```
+
+</TabItem>
+
+</Tabs>
