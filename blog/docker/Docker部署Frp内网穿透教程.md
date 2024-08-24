@@ -262,7 +262,7 @@ docker run -d  -p 81:80 --name=web --restart=always nginx
 
 ## 5.删除Proxies/TCP
 
-首先在内网客户端使用**Xftp 7**远程连接，进入 `/root/frps.ini`文件路径双击打开，并找到需要删除的代理项，然后保存退出。
+首先在**内网客户端**使用**Xftp 7**远程连接，进入 `/root/frps.ini`文件路径双击打开，并找到需要删除的代理项，然后保存退出。
 
 ```bash
 [nginx-test]
@@ -284,7 +284,7 @@ remote_port = 8022
 ...
 ```
 
-为了使配置更改生效，您需要在云服务器重启 FRP 服务端。如果您是在 Docker 中运行的 FRP 服务端，可以使用以下命令
+为了使配置更改生效，您需要在**云服务器**重启 FRP 服务端。如果您是在 Docker 中运行的 FRP 服务端，可以使用以下命令
 
 ```bash
 docker restart frps
