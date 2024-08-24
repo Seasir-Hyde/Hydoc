@@ -8,7 +8,6 @@ last_update:
   date: 2023/01/21
 keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
 ---
-import LinkList from "@site/src/components/LinkList"
 
 - 这里记录着我搭建博客的部分踩坑过程，分享在这里希望能够给遇到类似问题或者需要类似教程的小伙伴一些帮助，尽量少走弯路。
 
@@ -18,10 +17,9 @@ import LinkList from "@site/src/components/LinkList"
 
 **👇 建议多翻阅文官文档，或许会有你需要的答案**
 
-
-
+<!-- 用于侧边栏类别生成的索引页 -->
+<!-- 可选，并且将从父侧边栏类别的内容中自动推断出来 -->
+<!-- 官方文档：https://docusaurus.io/blog/2022/09/01/docusaurus-2.1#doccardlist-improvements -->
 import DocCardList from '@theme/DocCardList'; 
 
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
-
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList/>
