@@ -9,7 +9,12 @@ title: Docker部署Frp内网穿透教程
 date: 2024-08-24
 
 # 作者名称
-# authors: Hyde
+authors: Hyde
+
+# 最后更新日期，用于时间排序
+last_update:
+  date: 2024-08-25
+  author: Hyde
 
 # 文章标签，帮助分类
 tags: [随笔, docker，frp，内网穿透]

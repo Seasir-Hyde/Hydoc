@@ -65,8 +65,9 @@ const sidebars: SidebarsConfig = {
       }, 
       items: [
         // 指向 docs\skill\Docusaurus\NavFilter.md文档的slug
-        'skill/Docusaurus/Docusaurus-NavFilter', 
-        'skill/Docusaurus/Docusaurus-Footer',
+        'skill/Docusaurus/Docusaurus-NavFilter',  //nav模糊
+        'skill/Docusaurus/Docusaurus-Footer',  //波浪效果
+        'skill/Docusaurus/Docusaurus-UpdateTime',  //最后更新时间
       ],
     },
   ], 

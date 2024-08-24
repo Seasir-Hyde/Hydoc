@@ -2,8 +2,8 @@
 id: Docusaurus-guides
 slug: /Docusaurus-guides
 title: Docusaurus 养成记录
-authors: Hyde
-date: 2024/02/24
+author: Hyde
+date: 2024-08-24
 last_update:
   date: 2024-08-24
 keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']

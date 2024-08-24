@@ -12,11 +12,11 @@ title: Footer波浪效果
 date: 2024/08/24
 
 # 作者名称
-authors: Hyde
+author: Hyde
 
 # 最后更新日期，用于时间排序
 last_update:
-  date: 2024/08/24
+  date: 2024-08-24
 
 # 关键词，用于SEO优化
 keywords: [docusaurus]

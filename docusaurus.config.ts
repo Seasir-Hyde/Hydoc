@@ -41,8 +41,8 @@ const config: Config = {
 
     metadata: [
       {
-        name: 'author',
-        content: '愧怍',
+        name: 'Hyde',
+        content: '海德',
       },
       {
         name: 'keywords',
@@ -236,25 +236,39 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
   presets: [
     [
-      'classic',
+      'classic',  // 经典预设
       {
         docs: {
-          path: 'docs',
-          sidebarPath: 'sidebars.ts',
+          path: 'docs',  // 文档存放的目
+          sidebarPath: 'sidebars.ts',  //指定侧边栏配置文件的位置。
+          showLastUpdateTime: true,  // 是否显示最后一次更新时间
+          showLastUpdateAuthor: true,  // 是否显示最后一次更新的作者
+          editUrl: 'https://github.com/your-repo/edit/main/website/', // 编辑此页的URL
+          remarkPlugins: [], // 额外的 Remark 插件
+          rehypePlugins: [], // 额外的 Rehype 插件
+          include: ['**/*.md', '**/*.mdx'], // 包含哪些文件
+          exclude: ['**/_*.{js,jsx,ts,tsx,md,mdx}'], // 排除哪些文件
+          // docLayoutComponent: '@theme/DocPage', // 自定义文档页面布局组件
+          docItemComponent: '@theme/DocItem', // 自定义文档条目组件
         },
         blog: false,
         theme: {
-          customCss: ['./src/css/custom.css'],
+          customCss: ['./src/css/custom.css'],  // 自定义 CSS 文件的路径
         },
         sitemap: {
-          priority: 0.5,
+          changefreq: 'weekly', // 站点地图的更新频率
+          priority: 0.5, // 站点地图的优先级
+          ignorePatterns: ['/tags/**'], // 忽略哪些路径
+          filename: 'sitemap.xml', // 站点地图文件名
         },
         gtag: {
-          trackingID: 'G-S4SD5NXWXF',
-          anonymizeIP: true,
+          trackingID: 'G-S4SD5NXWXF',  // Google Analytics 的跟踪 ID
+          anonymizeIP: true,  //是否匿名化 IP 地址
         },
+        // 检查当前环境变量NODE_ENV的值是否为'development'
+        // 如果为'development'，则设置debug为true，否则为false
         debug: process.env.NODE_ENV === 'development',
-      } satisfies Preset.Options,
+      } satisfies Preset.Options,  // Preset.Options 类型的配置对象
     ],
   ],
   plugins: [
