@@ -36,6 +36,9 @@ Option 'bundler' can only be used when 'module' is set to 'preserve' or to 'es20
 
 报错截图：
 
+![image-20240825171547001](https://ice.frostsky.com/2024/08/25/ba1952550d0e43d32ab87e1d967ea1b2.png)
+
+
 遇到这种情况时，通常是因为 TypeScript 找不到 jest 的类型定义文件。你可以按照以下步骤来解决这个问题：
 
 ## 1.确保已安装 @types/jest
@@ -72,3 +75,7 @@ pnpm install --save-dev @types/jest
 ```pnpm
 pnpm start
 ```
+
+## 4.效果展示
+
+![image-20240825180225439](https://ice.frostsky.com/2024/08/25/38f04b86a62cc2bdf9ab8ccac5538e86.png)

@@ -272,8 +272,18 @@ const config: Config = {
     ],
   ],
   plugins: [
-    'docusaurus-plugin-image-zoom',
-    '@docusaurus/plugin-ideal-image',
+    'docusaurus-plugin-image-zoom', // 图片放大插件
+    [
+      '@docusaurus/plugin-ideal-image',  //图像的 Docusaurus 插件（响应式、懒加载及低像素占位图）。
+      {
+        name: 'image',  // 图像的名称
+        quality: 70,  //JPEG 压缩质量（0-100）
+        max: 1030, //除了手动指定sizes，您还可以指定min、max和steps，然后系统将为您生成尺寸。
+        min: 640, // 除了手动指定sizes，您还可以指定min、max和steps，然后系统将为您生成尺寸。
+        steps: 2, // min配置在和之间max（含）生成的图像数量
+        disableInDev: false,  // 是否在开发环境中禁用插件
+      },
+    ],
     // ['docusaurus-plugin-baidu-tongji', { token: 'c9a3849aa75f9c4a4e65f846cd1a5155' }],
     [
       '@docusaurus/plugin-pwa',
