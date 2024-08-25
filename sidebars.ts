@@ -71,6 +71,8 @@ const sidebars: SidebarsConfig = {
         'skill/Docusaurus/Docusaurus-menulist',  //侧边栏线条
         'skill/Docusaurus/Docusaurus-pagination-nav-link',  //分页导航
         'skill/Docusaurus/Docusaurus-jest',  //找不到“jest”的类型定义文件
+        'skill/Docusaurus/Docusaurus-table-of-contents__link',  //目录悬停和激活样式
+        'skill/Docusaurus/Docusaurus-scrollbar' //滚动条样式
       ],
     },
   ], 

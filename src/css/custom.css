@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+
+    --color-pink-light: rgb(93 168 255); /* 定义亮色主题下的滚动条颜色 */
     height: 100vh;
     --content-background: #fefefe;
     --ifm-color-primary: #12affa;
@@ -59,6 +61,7 @@
   }
 
   html[data-theme="dark"] {
+    --color-green-light: #322d31; /* 定义暗色主题下的滚动条颜色 */
     --content-background: #18181b;
     --ifm-color-primary: hsl(214deg 100% 60%);
     --ifm-color-primary-light: hsl(214deg 100% 75%);
@@ -381,3 +384,114 @@ div[class^="announcementBar_"] {
   /* 上一页下一页文字颜色 */
   color: #72a1ed;
 }
+
+/* 样式规则适用于所有的 .table-of-contents__link 元素 */
+.table-of-contents__link {
+  border-radius: 8px; /* 圆角边框 */
+  margin-top: -0.5rem; /* 上边距，调整元素的垂直位置 */
+  padding: 0.3rem 0 0.3rem 1rem; /* 内边距，顶部和底部 0.3rem，左侧 1rem */
+  font-weight: 550; /* 字体加粗 */
+  transition: 0.25s !important; /* 过渡效果，设置样式变化的过渡时间 */
+}
+
+/* 鼠标悬停时的样式 */
+.table-of-contents__link:hover,
+.table-of-contents__link:hover code {
+  background-color: rgba(4, 184, 145, 0.395); /* 背景颜色，带透明度 */
+  color: #333; /* 字体颜色 */
+}
+
+/* 激活状态下的样式 */
+.table-of-contents__link--active,
+.table-of-contents__link--active code {
+  background-color: #00d7a8; /* 背景颜色 */
+  color: #FFF; /* 字体颜色 */
+}
+
+/* 全局滚动条样式 */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2em;
+}
+
+/* 滚动条滑块样式 */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-pink-light);
+  background-image: -webkit-linear-gradient(
+    45deg,
+    hsla(0, 0%, 100%, 0.4) 25%,
+    transparent 0,
+    transparent 50%,
+    hsla(0, 0%, 100%, 0.4) 0,
+    hsla(0, 0%, 100%, 0.4) 75%,
+    transparent 0,
+    transparent
+  );
+  border-radius: 2em;
+}
+
+/* 滚动条滑块悬停效果 */
+::-webkit-scrollbar-thumb:hover {
+  background: #aaaaaa;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    hsla(0, 0%, 100%, 0.4) 25%,
+    transparent 0,
+    transparent 50%,
+    hsla(0, 0%, 100%, 0.4) 0,
+    hsla(0, 0%, 100%, 0.4) 75%,
+    transparent 0,
+    transparent
+  );
+  border-radius: 2em;
+}
+
+/* 确保目录容器可滚动 */
+.tableOfContents_src-theme-TOC-styles-module {
+  overflow-y: auto; /* 启用垂直滚动条 */
+  scrollbar-width: thin; /* Firefox 滚动条宽度 */
+  scrollbar-color: var(--color-pink-light) transparent; /* Firefox 滚动条滑块和轨道颜色 */
+}
+
+/* WebKit 浏览器的滚动条样式 */
+.tableOfContents_src-theme-TOC-styles-module::-webkit-scrollbar {
+  width: 0.5rem; /* 滚动条宽度 */
+}
+
+.tableOfContents_src-theme-TOC-styles-module::-webkit-scrollbar-thumb {
+  background: var(--color-pink-light); /* 滚动条滑块的颜色 */
+  border-radius: 2em; /* 滚动条滑块的圆角 */
+}
+
+.tableOfContents_src-theme-TOC-styles-module::-webkit-scrollbar-thumb:hover {
+  background: #26c6da; /* 滚动条滑块悬停时的颜色 */
+}
+
+/* 尝试隐藏 WebKit 浏览器中的滚动条按钮（上下箭头） */
+.tableOfContents_src-theme-TOC-styles-module::-webkit-scrollbar-button {
+  display: none; /* 隐藏滚动条按钮 */
+}
+
+/* 隐藏滚动条背景 */
+.tableOfContents_src-theme-TOC-styles-module::-webkit-scrollbar {
+  background: transparent; /* 隐藏滚动条背景 */
+}
+
+/* 明亮模式样式 */
+.tableOfContents_src-theme-TOC-styles-module {
+  /* 由于不同浏览器兼容性和箭头不能隐藏，直接把整个目录滚动条隐藏了 */
+  --color-pink-light: #00000000; /* 明亮模式下的滚动条颜色 */
+}
+
+/* 暗黑模式样式 */
+@media (prefers-color-scheme: dark) {
+  .tableOfContents_src-theme-TOC-styles-module {
+    --color-pink-light: #322d31; /* 暗黑模式下的滚动条颜色 */
+  }
+}
+
+
