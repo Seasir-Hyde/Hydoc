@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    height: 100vh;
     --content-background: #fefefe;
     --ifm-color-primary: #12affa;
     --ifm-color-primary-dark: #05a1ec;
@@ -57,7 +58,7 @@
     --docusaurus-highlighted-code-line-bg: #d1d5db;
   }
 
-  html[data-theme='dark'] {
+  html[data-theme="dark"] {
     --content-background: #18181b;
     --ifm-color-primary: hsl(214deg 100% 60%);
     --ifm-color-primary-light: hsl(214deg 100% 75%);
@@ -79,7 +80,7 @@
 }
 
 a:hover {
-  @apply no-underline;
+  color: #72a1ed;
 }
 
 @layer components {
@@ -94,11 +95,13 @@ a:hover {
 html,
 body {
   scroll-behavior: smooth;
+  height: 100vh;
+  margin: 0;
 }
 
 body {
-  font-family: misans, system-ui, -apple-system, 'PingFang SC',
-    'Microsoft YaHei';
+  font-family: misans, system-ui, -apple-system, "PingFang SC",
+    "Microsoft YaHei";
 }
 
 .navbar__item {
@@ -113,7 +116,7 @@ body {
   --prism-background-color: #f6f8fa !important;
 }
 
-html[data-theme='dark'] .theme-code-block {
+html[data-theme="dark"] .theme-code-block {
   --prism-background-color: #1e1e1e !important;
 }
 
@@ -171,12 +174,20 @@ article p > span > a {
   line-height: 1.5rem;
 }
 
-:where(html[data-theme='dark']) article .markdown strong {
+:where(html[data-theme="dark"]) article .markdown strong {
   color: #fff;
 }
 
 .navbar {
-  box-shadow: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: hsla(0, 0%, 100%, 0.2);
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.102),
+    0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  /* 添加过渡动画 */
+  transition: backdrop-filter 0.5s linear, background-color 0.5s linear,
+    box-shadow 0.5s linear, opacity 0.5s linear;
 }
 
 .navbar-sidebar__items {
@@ -216,15 +227,19 @@ article p > span > a {
   }
 
   .navbar-sidebar {
-    display: block;
+    height: 200rem; /* 高度为视口高度的 200rem */
   }
 }
 
+.navbar-sidebar__backdrop {
+  /* 移动端侧边栏背景色,背景色为透明 */
+  background-color: rgba(0, 0, 0, 0);
+}
 code {
   color: var(--ifm-code-color);
 }
 
-div[class^='announcementBar_'] {
+div[class^="announcementBar_"] {
   background: repeating-linear-gradient(
     -35deg,
     var(--ifm-color-primary-lighter),
@@ -247,7 +262,7 @@ div[class^='announcementBar_'] {
 }
 
 .tag::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -268,26 +283,101 @@ div[class^='announcementBar_'] {
   display: none;
 }
 
-.prose :where(img):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+.prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   margin: 0;
 }
 
 .prose
-  :where(strong):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   color: var(--tw-prose-bold);
   font-weight: 520;
 }
 
 .prose
   :where(code):not(
-    :where([class~='not-prose'], [class~='not-prose'] *)
+    :where([class~="not-prose"], [class~="not-prose"] *)
   )::before {
-  content: '';
+  content: "";
 }
 
 .prose
   :where(code):not(
-    :where([class~='not-prose'], [class~='not-prose'] *)
+    :where([class~="not-prose"], [class~="not-prose"] *)
   )::after {
-  content: '';
+  content: "";
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #eaf6ff; /* 调整颜色以适应您的设计 */
+}
+
+.wave::before,
+.wave::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  background-color: inherit;
+  transform: scaleY(0.5);
+}
+
+.wave::before {
+  bottom: 100%;
+  z-index: -1;
+}
+
+.wave::after {
+  top: 100%;
+  transform: scaleY(-0.5);
+}
+
+/* 侧边栏左侧线条 */
+.menu__list .menu__list {
+  border-bottom: 2px solid #ced9e3;
+  /* 设置底部边框颜色为透明 */
+  border-bottom-color: #ffffff00 !important;
+  /* 设置左边框颜色 */
+  border-left: 2px solid #ced9e3;
+  /* 设置边框圆角 */
+  border-radius: 0 0 0 10px;
+  /* 设置左边距 */
+  margin-left: 1rem;
+  /* 设置左边内边距 */
+  padding-left: 0.3rem;
+}
+
+/* 分页导航 */
+.pagination-nav__link {
+  border: 1px solid #00000000;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination-nav__link:hover {
+  border: 1px solid #72a1ed;
+  transform: scaleX(0.9); /* 缩小宽度到 90% */
+}
+
+.pagination-nav__label:hover {
+  transform: scale(1.1); /* 将元素缩小到原始大小的 80% */
+  transition: transform 0.3s ease; /* 平滑过渡效果 */
+  display: inline-block; /* 确保元素在缩放时不会破坏布局 */
+}
+
+.pagination-nav {
+  border: solid #d8d8d8;
+  border-width: 2px 0 0;
+  margin: 2em 0;
+  padding-top: 0.5rem;
+}
+
+.pagination-nav__sublabel {
+  /* 上一页下一页文字颜色 */
+  color: #72a1ed;
 }

@@ -1,4 +1,5 @@
 :root {
+  /* 文章标签边框 */
   --docusaurus-tag-list-border: var(--ifm-color-emphasis-300);
 }
 

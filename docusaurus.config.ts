@@ -8,27 +8,41 @@ const beian = '闽ICP备2020017848号-2'
 const beian1 = '闽公网安备35021102000847号'
 
 const config: Config = {
-  title: '愧怍',
-  url: 'https://kuizuo.cn',
+  title: 'Hydoc的小站',
+  url: 'https://kuizuo.cn',  //网站url
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
-  organizationName: 'kuizuo',
+  favicon: 'img/favicon.svg',
+  organizationName: 'Hyde',
   projectName: 'blog',
   customFields: {
     bio: '道阻且长，行则将至',
+    // 站点描述
     description:
-      '是一个由愧怍创建的个人博客，主要分享编程开发知识和项目，该网站基于 React 驱动的静态网站生成器 Docusaurus 构建。',
+      '该网站基于 React 驱动的静态网站生成器 Docusaurus 构建。由愧怍进行二次魔改，Hyed在愧怍进行二次修改',
   },
   themeConfig: {
+    // 禁用面包屑导航
+    breadcrumbs: false,
     // announcementBar: {
     //   id: 'announcementBar-3',
     //   content: ``,
     // },
     image: 'img/og.png',
+
+    // 顶部公共栏
+    announcementBar: {
+      id: 'support_us',
+      content:
+        '欢迎访问我的网站👋这里将会持续更新，感谢关注~',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: true,
+    },
+
     metadata: [
       {
-        name: 'author',
-        content: '愧怍',
+        name: 'Hyde',
+        content: '海德',
       },
       {
         name: 'keywords',
@@ -41,36 +55,88 @@ const config: Config = {
     ],
     docs: {
       sidebar: {
+        // 隐藏侧边栏
         hideable: true,
+        // 自动折叠侧边栏
+        autoCollapseCategories: true,
       },
     },
     navbar: {
       logo: {
-        alt: '愧怍',
-        src: 'img/logo.webp',
-        srcDark: 'img/logo.webp',
+        alt: 'Hyde',
+        // 亮色模式下头像logo
+        src: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
+        // 暗色模式下头像logo
+        srcDark: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
       },
       hideOnScroll: true,
       items: [
-        { label: '博客', position: 'right', to: 'blog' },
-        { label: '项目', position: 'right', to: 'project' },
-        { label: '友链', position: 'right', to: 'friends' },
-        { label: '关于', position: 'right', to: 'about' },
+        { label: '🏡 Home', position: 'left', to: '/', },
         {
-          label: '更多',
-          position: 'right',
+          label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
-            { label: '归档', to: 'blog/archive' },
-            { label: '笔记', to: 'docs/skill' },
-            { label: '工具推荐', to: 'docs/tools' },
+            { label: '🖥️ 手记', to: 'docs/overview', },
+            { label: '🌐 Docusaurus ', to: 'docs/skill/', },
+            {
+              label: '🛠️ 专栏', to: 'docs/tools/',
+            },
           ],
         },
-        // {
-        //   type: 'localeDropdown',
-        //   position: 'right',
-        // },
+        {
+          label: '📖 Blog',
+          position: 'left',
+          // to: '/Hello-Blog',
+          items: [
+            { label: '📕 文稿&分类', to: 'blog', },
+            { label: '⏰ 时间轴', to: 'blog/archive', },
+          ],
+        },
+        {
+          label: '📸 Life Style',
+          position: 'left',
+          to: '#',
+          items: [
+            { label: '🐺 Wild Wolf', to: 'docs/WildWolf/', },
+            { label: '✨ 生活指南', to: 'docs/LifeGuide/', },
+            { label: '🖥 效率指北', to: 'docs/EfficiencyGuide/', },
+          ],
+        },
+        {
+          label: '🎵 Album Music',
+          position: 'left',
+          to: '#',
+          items: [
+            { label: '🖼️ 时光', to: 'docs/WildWolf/', },
+            { label: '🎧 音乐', to: 'docs/LifeGuide/', },
+          ],
+        },
+        {
+          label: '🔗 Links',
+          to: '#',
+          position: 'right',
+          items: [
+            { label: '🗺️ 友链', to: 'friends' },
+            { label: '🌐 导航', to: 'https://google.com', },
+            { label: '🚀 关于', to: 'about' },
+          ],
+        },
+        {
+          label: '🗃️ Project',
+          to: 'project', //跳转到项目
+          position: 'left',
+          items: [
+            { label: '📋 项目', to: 'project', },
+            { label: '🧰 工具推荐', to: 'docs/tools' },
+          ],
+        },
+        // 导航栏的语言下拉选择栏
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
       ],
     },
+    // 页脚
     footer: {
       style: 'dark',
       links: [
@@ -120,8 +186,7 @@ const config: Config = {
       ],
       copyright: `
         <p style="margin-bottom: 0;"><a href="http://beian.miit.gov.cn/">${beian}</a></p>
-        <p style="display: inline-flex; align-items: center;"><img style="height:20px;margin-right: 0.5rem;" src="/img/police.png" alt="police" height="20"/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${
-          beian1.match(/\d+/)?.[0]
+        <p style="display: inline-flex; align-items: center;"><img style="height:20px;margin-right: 0.5rem;" src="/img/police.png" alt="police" height="20"/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${beian1.match(/\d+/)?.[0]
         }" >${beian1}</a></p>
         <p>Copyright © 2020 - ${new Date().getFullYear()} kuizuo. | Built with Docusaurus.</p>
         `,
@@ -171,25 +236,39 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
   presets: [
     [
-      'classic',
+      'classic',  // 经典预设
       {
         docs: {
-          path: 'docs',
-          sidebarPath: 'sidebars.ts',
+          path: 'docs',  // 文档存放的目
+          sidebarPath: 'sidebars.ts',  //指定侧边栏配置文件的位置。
+          showLastUpdateTime: true,  // 是否显示最后一次更新时间
+          showLastUpdateAuthor: true,  // 是否显示最后一次更新的作者
+          editUrl: 'https://github.com/your-repo/edit/main/website/', // 编辑此页的URL
+          remarkPlugins: [], // 额外的 Remark 插件
+          rehypePlugins: [], // 额外的 Rehype 插件
+          include: ['**/*.md', '**/*.mdx'], // 包含哪些文件
+          exclude: ['**/_*.{js,jsx,ts,tsx,md,mdx}'], // 排除哪些文件
+          // docLayoutComponent: '@theme/DocPage', // 自定义文档页面布局组件
+          docItemComponent: '@theme/DocItem', // 自定义文档条目组件
         },
         blog: false,
         theme: {
-          customCss: ['./src/css/custom.css'],
+          customCss: ['./src/css/custom.css'],  // 自定义 CSS 文件的路径
         },
         sitemap: {
-          priority: 0.5,
+          changefreq: 'weekly', // 站点地图的更新频率
+          priority: 0.5, // 站点地图的优先级
+          ignorePatterns: ['/tags/**'], // 忽略哪些路径
+          filename: 'sitemap.xml', // 站点地图文件名
         },
         gtag: {
-          trackingID: 'G-S4SD5NXWXF',
-          anonymizeIP: true,
+          trackingID: 'G-S4SD5NXWXF',  // Google Analytics 的跟踪 ID
+          anonymizeIP: true,  //是否匿名化 IP 地址
         },
+        // 检查当前环境变量NODE_ENV的值是否为'development'
+        // 如果为'development'，则设置debug为true，否则为false
         debug: process.env.NODE_ENV === 'development',
-      } satisfies Preset.Options,
+      } satisfies Preset.Options,  // Preset.Options 类型的配置对象
     ],
   ],
   plugins: [
@@ -257,23 +336,23 @@ const config: Config = {
                 tagName: 'script',
                 innerHTML: `
     (${function () {
-      console.log(
-        `%c Kz Blog %c https://github.com/kuizuo/blog`,
-        'color: #fff; margin: 1em 0; padding: 5px 0; background: #12affa;',
-        'margin: 1em 0; padding: 5px 0; background: #efefef;',
-      )
+                    console.log(
+                      `%c Hyde Blog %c https://github.com/Seasir-Hyde/Hydoc`,
+                      'color: #fff; margin: 1em 0; padding: 5px 0; background: #12affa;',
+                      'margin: 1em 0; padding: 5px 0; background: #efefef;',
+                    )
 
-      const motto = `
-This Webisite Powered By Kz Blog.
-Written by Docusaurus, Coding with Love.
---------
-Love what you do and do what you love.
-`
+                    const motto = `
+                      This Webisite Powered By Kz Blog.
+                      Written by Docusaurus, Coding with Love.
+                      --------
+                      Love what you do and do what you love.
+                      `
 
-      if (document.firstChild?.nodeType !== Node.COMMENT_NODE) {
-        document.prepend(document.createComment(motto))
-      }
-    }.toString()})();`,
+                    if (document.firstChild?.nodeType !== Node.COMMENT_NODE) {
+                      document.prepend(document.createComment(motto))
+                    }
+                  }.toString()})();`,
               },
             ],
           }
@@ -304,7 +383,10 @@ Love what you do and do what you love.
       },
     },
   },
-  onBrokenLinks: 'warn',
+
+  // 这将仅抑制警告，而不会修复潜在问题。
+  onBrokenMarkdownLinks: 'ignore',
+  onBrokenLinks: 'ignore',
 }
 
 export default config
