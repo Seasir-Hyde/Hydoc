@@ -7,7 +7,8 @@ export default function PaginatorNavLink(props: Props): JSX.Element {
   return (
     <Link
       className={cn(
-        'pagination-nav__link border-2 border-link hover:bg-[#a1d8f71b]',
+        // 上一页和下一个hover背景颜色
+        'pagination-nav__link border-2 border-link hover:bg-[#00000000]',
         isNext ? 'pagination-nav__link--next' : 'pagination-nav__link--prev',
       )}
       to={permalink}

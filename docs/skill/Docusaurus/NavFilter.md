@@ -22,7 +22,7 @@ last_update:
 keywords: [docusaurus]
 
 # 文章标签，帮助分类
-tags: [随笔, docker，frp，内网穿透]
+tags: [docusaurus, NavFilter]
 ---
 
 # navbar导航栏模糊
