@@ -17,6 +17,16 @@ keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
 
 **👇 建议多翻阅文官文档，或许会有你需要的答案**
 
+## 侧边栏类别生成的索引页
+- 可选，并且将从父侧边栏类别的内容中自动推断出来
+- 官方文档：https://docusaurus.io/blog/2022/09/01/docusaurus-2.1#doccardlist-improvements
+- 在你需要的页面中添加以下代码
+```jsx
+import DocCardList from '@theme/DocCardList'; 
+
+<DocCardList/>
+```
+
 <!-- 用于侧边栏类别生成的索引页 -->
 <!-- 可选，并且将从父侧边栏类别的内容中自动推断出来 -->
 <!-- 官方文档：https://docusaurus.io/blog/2022/09/01/docusaurus-2.1#doccardlist-improvements -->
