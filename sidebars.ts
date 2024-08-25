@@ -70,6 +70,7 @@ const sidebars: SidebarsConfig = {
         'skill/Docusaurus/Docusaurus-UpdateTime',  //最后更新时间
         'skill/Docusaurus/Docusaurus-menulist',  //侧边栏线条
         'skill/Docusaurus/Docusaurus-pagination-nav-link',  //分页导航
+        'skill/Docusaurus/Docusaurus-jest',  //找不到“jest”的类型定义文件
       ],
     },
   ], 
