@@ -494,8 +494,8 @@ div[class^="announcementBar_"] {
 }
 
 /* 返回顶部按钮样式 */
-/* 全局样式覆盖 */
 [class*="backToTopButton"] {
+  /* 全局样式覆盖 */
   outline: none !important;
   box-shadow: none !important;
   background-color: transparent !important;
