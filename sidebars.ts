@@ -75,6 +75,7 @@ const sidebars: SidebarsConfig = {
         'skill/Docusaurus/Docusaurus-scrollbar', //滚动条样式
         'skill/Docusaurus/Docusaurus-back-top',   //回到顶部
         'skill/Docusaurus/Docusaurus-typewriter', //打字机效果
+        'skill/Docusaurus/Docusaurus-scripts',   //自定义javascript 脚本
       ],
     },
   ], 

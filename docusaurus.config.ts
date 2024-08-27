@@ -238,12 +238,12 @@ const config: Config = {
   // 插入外部 JavaScript 链接
   scripts: [
     {
-      src: 'https://assets.salesmartly.com/js/project_23232_114665_1724296502.js',
+      src: 'https://assets.salesmartly.com/js/project_23232_114665_1724296502.js',  //在线聊天
       async: true,  // 异步加载脚本
     },
     {
-      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',
-      defer: true,  // 可选，延迟加载
+      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',  //// 看板娘
+      defer: true,  // 延迟加载
     },
   ],
 
