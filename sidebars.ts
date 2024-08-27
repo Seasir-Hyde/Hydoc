@@ -76,6 +76,8 @@ const sidebars: SidebarsConfig = {
         'skill/Docusaurus/Docusaurus-back-top',   //回到顶部
         'skill/Docusaurus/Docusaurus-typewriter', //打字机效果
         'skill/Docusaurus/Docusaurus-scripts',   //自定义javascript 脚本
+        'skill/Docusaurus/Docusaurus-blogtime-tag',   //首页博客创建时间和标签
+        'skill/Docusaurus/Docusaurus-Technology-Stack',   //首页技术栈
       ],
     },
   ], 

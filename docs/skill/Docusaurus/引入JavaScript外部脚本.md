@@ -9,14 +9,14 @@ slug: /Docusaurus-scripts
 title: 引入JavaScript外部脚本
 
 # 发布日期，用于时间排序
-date: 2024/08/26
+date: 2024/08/27
 
 # 作者名称
 author: Hyde
 
 # 最后更新日期，用于时间排序
 last_update:
-  date: 2024-08-26
+  date: 2024-08-27
 
 # 关键词，用于SEO优化
 keywords: [docusaurus]
