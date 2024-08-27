@@ -3,6 +3,8 @@ id: Docusaurus-guides
 slug: /Docusaurus-guides
 title: Docusaurus 养成记录
 author: Hyde
+#用于在侧边栏中显示文档的顺序，数字越小越靠前
+sidebar_position: 0
 date: 2024-08-24
 last_update:
   date: 2024-08-24

@@ -11,6 +11,9 @@ title: 找不到“jest”的类型定义文件
 # 发布日期，用于时间排序
 date: 2024/08/25
 
+#用于在侧边栏中显示文档的顺序，数字越小越靠前
+sidebar_position: 14
+
 # 作者名称
 author: Hyde
 

@@ -14,6 +14,9 @@ date: 2024/08/24
 # 作者名称
 authors: Hyde
 
+#用于在侧边栏中显示文档的顺序，数字越小越靠前
+sidebar_position: 9
+
 # 最后更新日期，用于时间排序
 last_update:
   date: 2024/08/24

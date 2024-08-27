@@ -3,10 +3,13 @@
 id: introduction
 
 # 文档的URL路径标识符，用于生成文档URL
-slug: /skill
+slug: /Docusaurus
 
 # 文档标题，显示在页面标题
-title: Docusaurus
+title: 前言
+
+#用于在侧边栏中显示文档的顺序，数字越小越靠前
+sidebar_position: 0
 
 # 关键词，用于SEO优化
 keywords: ['guides', 'Docusaurus', 'Docusaurus-guides']
