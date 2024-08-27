@@ -61,7 +61,7 @@ const config: Config = {
         autoCollapseCategories: true,
       },
     },
-    navbar: {
+    navbar: { // 顶部导航栏
       logo: {
         alt: 'Hyde',
         // 亮色模式下头像logo
@@ -76,7 +76,7 @@ const config: Config = {
           label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
             { label: '🖥️ 手记', to: 'docs/overview', },
-            { label: '🌐 Docusaurus ', to: 'docs/skill/', },
+            { label: '🌐 Docusaurus ', to: 'docs/skill', },
             {
               label: '🛠️ 专栏', to: 'docs/tools/',
             },
@@ -136,6 +136,9 @@ const config: Config = {
         },
       ],
     },
+    // 引用自动生成的侧边栏配置
+    sidebars: require('./sidebars.ts'),
+
     // 页脚
     footer: {
       style: 'dark',
