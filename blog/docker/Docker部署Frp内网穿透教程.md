@@ -126,8 +126,8 @@ dashboard_user = admin
 # 登录面板的密码
 dashboard_pwd = 123456
 
-# 身份验证
-token = 123456  #随便填写无要求
+# 身份验证，随便填写无要求
+token = 123456
 ```
 
 - 启动容器
