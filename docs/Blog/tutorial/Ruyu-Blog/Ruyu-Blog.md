@@ -1101,18 +1101,18 @@ docker build . -t ruyu-blog-hd
 
 ![image-20240812010004567](https://ice.frostsky.com/2024/08/12/d048d67681d42ca98476d6f302513f59.png)
 
-### 5.1.5.启动后端镜像
-```bash
-docker start ruyu-blog-hd
-```
-
-### 5.1.6.运行后端容器
+### 5.1.5.运行后端容器
 
 ```bash
 docker run --name ruyu-blog-hd -d -p 8088:8088 ruyu-blog-hd
 ```
-
 ![image-20240812010159849](https://ice.frostsky.com/2024/08/12/10c99f9dcdd2447731ae1a550938acb1.png)
+
+### 5.1.6.启动后端镜像
+```bash
+docker start ruyu-blog-hd
+```
+
 ### 5.1.7.验证后端容器
 ```bash
 docker ps

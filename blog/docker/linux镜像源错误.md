@@ -16,10 +16,10 @@ last_update:
   date: 2024/09/01
 
 # 文章标签，帮助分类
-tags: [随笔, docker, yum, install, image]
+tags: [随笔, yum, install, image]
 
 #关键词，用于SEO优化
-keywords: [随笔, docker, yum, install, image]
+keywords: [随笔, yum, install, image]
 
 # 文档的简要描述
 description: 使用 yum 安装或更新软件包时，出现无法解析 mirrorlist.centos.org 主机地址的错误

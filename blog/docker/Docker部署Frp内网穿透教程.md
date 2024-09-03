@@ -185,7 +185,7 @@ vim /root/frpc.ini
 ```bash
 [common]
 # 云服务器的IP地址，FRP客户端连接到此地址
-server_addr = xxx.xxx.xxx.xxx
+server_addr = [填写云服务器的IP地址]
 
 # 服务端监听的端口，FRP客户端将连接此端口
 server_port = 7000
@@ -205,7 +205,7 @@ local_ip = 127.0.0.1
 local_port = 80
 
 # 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
-remote_port = 8083
+remote_port = 8082
 
 
 [ruyu-blog-ht]
@@ -219,7 +219,7 @@ local_ip = 127.0.0.1
 local_port = 81
 
 # 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
-remote_port = 8084
+remote_port = 8083
 
 
 [ruyu-hitokoto]
@@ -233,7 +233,21 @@ local_ip = 192.168.80.128
 local_port = 8000
 
 # 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
-remote_port = 8085
+remote_port = 8084
+
+
+[ruyu-minio]
+# 代理的类型，这里是TCP代理
+type = tcp
+
+# 本地应用的IP地址，这里是一个内网地址，FRP客户端会从这里转发流量
+local_ip = 192.168.80.128
+
+# 本地应用的端口，FRP客户端会将请求转发到这个端口
+local_port = 9000
+
+# 远程服务器上对应的端口，外部访问此端口时流量会被转发到本地的local_ip:local_port
+remote_port = 9000
 ```
 
 - 启动容器
@@ -243,9 +257,6 @@ remote_port = 8085
 ```bash
 # 运行 FRP 客户端的 Docker 容器
 docker run --restart=always --network host -d -v /root/frpc.ini:/etc/frp/frpc.ini --name frpc registry.cn-shenzhen.aliyuncs.com/mogublog_business/frpc
-
-# 运行 Nginx 的 Docker 容器
-docker run -d  -p 81:80 --name=web --restart=always nginx
 ```
 
 ![image-20240713104737686](https://onedayxyy.cn/images/image-20240713104737686.png)
