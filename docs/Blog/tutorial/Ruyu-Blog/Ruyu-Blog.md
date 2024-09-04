@@ -1087,6 +1087,9 @@ docker stop rabbitmq
 #或者停止所有正在运行的Docker容器
 docker stop $(docker ps -q)
 
+#启动所有停止的Docker容器
+docker start $(docker ps -aq)
+
 #删除后端容器
 docker rm ruyu-blog-hd
 ```

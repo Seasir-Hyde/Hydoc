@@ -191,7 +191,7 @@ server_addr = [填写云服务器的IP地址]
 server_port = 7000
 
 # 服务端设置的token，用于客户端与服务端之间的身份验证
-token = 123456
+token = [填写云服务器的token，比如123456]
 
 
 [ruyu-blog-qt]
