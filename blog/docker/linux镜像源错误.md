@@ -1,6 +1,6 @@
 ---
 # 文档的URL路径标识符
-slug: docker-linux-install-
+slug: docker-linux-install
 
 # 文档标题，显示在页面顶部
 title: linux镜像源错误
@@ -28,7 +28,7 @@ description: 使用 yum 安装或更新软件包时，出现无法解析 mirrorl
 image: https://pic.netbian.com/uploads/allimg/240622/234050-171907085047ed.jpg
 
 #置顶级别，决定文章在列表中的位置
-sticky: 0
+sticky: 2
 ---
 
 初始化安装linux系统，安装在使用 yum 安装或更新软件包时遇到了镜像源的问题。错误信息显示 yum 无法解析 mirrorlist.centos.org 的主机地址，导致无法获取镜像列表。这通常是由于网络问题、DNS配置错误或者镜像源本身的问题引起的。以下是一些解决此问题的方法：

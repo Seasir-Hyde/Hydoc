@@ -324,7 +324,7 @@ const config: Config = {
       './src/plugin/plugin-content-blog', // 为了实现全局 blog 数据，必须改写 plugin-content-blog 插件
       {
         path: 'blog',
-        editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
+        editUrl: ({ blogDirPath, blogPath }) =>
           `https://github.com/kuizuo/blog/edit/main/${blogDirPath}/${blogPath}`,
         editLocalizedFiles: false,
         blogDescription: '代码人生：编织技术与生活的博客之旅',
@@ -332,7 +332,7 @@ const config: Config = {
         blogSidebarTitle: 'Blogs',
         postsPerPage: 12,
         showReadingTime: true,
-        readingTime: ({ content, frontMatter, defaultReadingTime }) =>
+        readingTime: ({ content, defaultReadingTime }) =>
           defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
         feedOptions: {
           type: 'all',
@@ -341,7 +341,7 @@ const config: Config = {
         },
       },
     ],
-    async function tailwindcssPlugin() {
+    async function () {
       return {
         name: 'docusaurus-tailwindcss',
         configurePostCss(postcssOptions) {
@@ -352,7 +352,7 @@ const config: Config = {
         },
       }
     },
-    async function injectMotto() {
+    async function () {
       return {
         name: 'docusaurus-motto',
         injectHtmlTags() {
