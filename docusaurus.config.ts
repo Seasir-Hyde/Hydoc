@@ -75,8 +75,8 @@ const config: Config = {
         {
           label: '✍️ Notes', position: 'left', to: 'docs/overview', //跳转到概述',
           items: [
-            { label: '🖥️ 手记', to: 'docs/overview', },
-            { label: '🌐 Docusaurus ', to: 'docs/Docusaurus', },
+            { label: '📖 博客', to: 'docs/overview', },
+            { label: '📘 Docusaurus ', to: 'docs/Docusaurus', },
             {
               label: '🛠️ 专栏', to: 'docs/tools/',
             },
@@ -116,7 +116,7 @@ const config: Config = {
           position: 'right',
           items: [
             { label: '🗺️ 友链', to: 'friends' },
-            { label: '🌐 导航', to: 'https://google.com', },
+            { label: '🌐 导航', to: 'website', },
             { label: '🚀 关于', to: 'about' },
           ],
         },
