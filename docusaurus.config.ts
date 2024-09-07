@@ -65,9 +65,9 @@ const config: Config = {
       logo: {
         alt: 'Hyde',
         // 亮色模式下头像logo
-        src: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
+        src: 'img/friend/hydoc-logo.png',
         // 暗色模式下头像logo
-        srcDark: 'https://ice.frostsky.com/2024/08/17/fe2225d1be58e6076fd44a1744cd69e4.png',
+        srcDark: 'img/friend/hydoc-logo.png',
       },
       hideOnScroll: true,
       items: [
