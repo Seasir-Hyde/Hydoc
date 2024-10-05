@@ -69,17 +69,21 @@ vi  /etc/docker/daemon.json
 ```bash
 {
     "registry-mirrors": [
-    "https://mirror.ccs.tencentyun.com",
-    "https://hub.uuuadc.top",
-    "https://docker.anyhub.us.kg",
-    "https://dockerhub.jobcher.com",
-    "https://dockerhub.icu",
-    "https://docker.ckyl.me",
-    "https://docker.awsl9527.cn"
+        "https://mu50x193.mirror.aliyuncs.com",  //阿里云镜像加速地址
+        "https://docker.m.daocloud.io",          //daocloud镜像加速地址
+        "https://dockerhub.timeweb.cloud", 		//timeweb镜像加速地址
+        "https://hub.uuuadc.top",
+        "https://docker.anyhub.us.kg",
+        "https://dockerhub.jobcher.com",
+        "https://dockerhub.icu",
+        "https://docker.ckyl.me",
+        "https://docker.awsl9527.cn"
     ],
     "live-restore": true
 }
 ```
+
+镜像源地址来源于：https://blog.csdn.net/jundao1997/article/details/141756747
 
 添加好后按下esc，然后输入:wq       退出保存
 
@@ -733,8 +737,8 @@ spring:
       log-system: log_routing_key_system
   mail:
     host: smtp.qq.com
-    username:
-    password:
+    username: #填写自己的邮箱，例如：123456@qq.com
+    password: #填写自己的邮箱授权码
     chat-gpt:
       email:
       password:
@@ -806,7 +810,7 @@ oauth:
 web:
   index:
     # 网站前端首页
-    path:  http://localhost:99/
+    path:  http://blog.seasir.top/
 # knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true
@@ -822,7 +826,11 @@ http_pool:
 # 连接 minio
 minio:
   # minio地址+9000端口
-  endpoint: http://192.168.222.128:9000
+  endpoint: https://minio.seasir.top
+  #endpoint: http://192.168.80.128:9000 (本地虚拟机填写这个配置)
+  #endpoint: http://云服务器IP:9000 (通过frp填写这个配置)
+  #endpoint: https://minio.seasir.top (通过域名解析填写这个配置，如配置SSL证书需要加上https)
+
   #minio访问密钥
   accessKey: #必填！上传自己的accessKey
   #minio密钥
@@ -1077,7 +1085,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 #运行后端容器前记得终止掉原来mysql、redis、rabbitmq容器或者直接停止掉所有容器。您可以使用以下命令：
 
-# 停止mysql容器
+# 停止后端容器
 docker stop ruyu-blog-hd
 # 停止redis容器
 docker stop redis:7.2.3

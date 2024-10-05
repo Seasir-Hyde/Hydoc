@@ -71,6 +71,17 @@ export const websiteData: WebsiteCategory[] = [
     ],
   },
   {
+    name: '导航网站',
+    websites: [
+      {
+        name: '链接星球-连接星辰',
+        desc: '爱达杂货铺，收集互联网上用的东西',
+        logo: 'https://linkqiu.com/images/icon/favicon.ico',
+        href: 'https://linkqiu.com/',
+      },
+    ],
+  },
+  {
     name: '站点🖥️',
     websites: [
       {
@@ -420,6 +431,17 @@ export const websiteData: WebsiteCategory[] = [
         tags: ['素材','图标'],
       },
     ],
+  },
+  {
+    name: '前端动画',
+    websites: [
+      {
+        name: '一个高性能的JavaScript动画库',
+        desc: '',
+        logo: 'https://gsap.com/safari-pinned-tab.svg',
+        href: 'https://gsap.com/',
+      },
+    ]
   },
   {
     name: 'CSS',
