@@ -8,8 +8,8 @@ export const Friend: Friend[] = [
   {
     title: 'Hyde小窝',
     description: '前后端分离博客',
-    website: 'https://blog.seasir.top/',
-    avatar: 'http://localhost:3000/img/friend/hydoc-logo.png',
+    website: 'https://seasir.top/',
+    avatar: 'https://hydoc.netlify.app/img/friend/hydoc-logo.png',
   },
 ];
 

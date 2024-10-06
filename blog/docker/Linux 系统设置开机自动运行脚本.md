@@ -28,7 +28,7 @@ description: 通过编辑 /etc/rc.d/rc.local 文件来添加一个脚本，使�
 image: https://pic.netbian.com/uploads/allimg/240629/195203-1719661923b0b6.jpg
 
 #置顶级别，决定文章在列表中的位置
-sticky: 0
+sticky: 3
 ---
 
 在工作中，我们经常有个需求，那就是在系统启动之后，自动启动某个脚本或服务。在 Windows 下，我们有很多方法可以设置开机启动，但在 Linux 系统下我们需要如何操作呢？

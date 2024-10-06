@@ -28,7 +28,7 @@ description: 无法连接到 unix:///var/run/docker.sock 上的 Docker 守护程
 image: https://pic.netbian.com/uploads/allimg/240826/000731-17246020516879.jpg
 
 #置顶级别，决定文章在列表中的位置
-sticky: 3
+sticky: 1
 ---
 
 无法连接到 unix:///var/run/docker.sock 上的 Docker 守护程序。docker 守护程序是否正在运行？
