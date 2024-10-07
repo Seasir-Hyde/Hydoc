@@ -147,6 +147,7 @@ http {
 
     # 其他 server 块可以类似配置...
 }
+
 ```
 
 ### ssl证书位置：
@@ -175,42 +176,165 @@ http {
 ### 主域名home.conf配置：
 
 ```nginx
+# HTTP -> HTTPS 重定向
 server {
     listen 80;
-    server_name onedayxyy.cn www.onedayxyy.cn;
+    listen [::]:80;
+    server_name seasir.top;
 
     # 配置 HTTPS 重定向
-    return 301 https://$host$request_uri;
+    return 301 https://seasir.top$request_uri;
 }
 
+# HTTPS 配置
 server {
-    listen       443 ssl;
-    listen       [::]:443 ssl;
-    server_name onedayxyy.cn www.onedayxyy.cn;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name seasir.top;
 
     root /root/home3.0;
 
+    # 默认首页
     location / {
         index index.html index.htm;
-    }    
-
-    # 图床数据
-    location /images {
-        alias /root/home3.0/images;  # 确保这里的路径是正确的
-        autoindex on;  # 可选，允许浏览目录
+        try_files $uri $uri/ =404;  # 处理404情况
     }
 
-    include /etc/nginx/common_configs/common_ssl_params.conf;  # 引入 SSL 公用参数
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
 
+    # 自定义错误页面
     error_page 404 /404.html;
-    location = /40x.html {
+    location = /404.html {
     }
 
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
     }
 }
+
 ```
+
+### blog.conf配置
+
+```nginx
+# 全局错误页面配置
+error_page 404 /404.html;
+error_page 500 502 503 504 /50x.html;
+
+# seasir.top 域名的 HTTP -> HTTPS 重定向
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name seasir.top;
+
+    # 配置 HTTP 到 HTTPS 的重定向
+    return 301 https://$host$request_uri;
+}
+
+# seasir.top 域名的 HTTPS 反向代理
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    server_name seasir.top;
+
+    root /root/home3.0;
+
+    location / {
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际后台路径
+        include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
+    }
+    
+	// highlight-start
+    # 图床数据
+    location /images {
+        alias /images;
+        index index.html;
+    }
+	// highlight-end
+
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
+}
+
+# admin.seasir.top 域名的 HTTP -> HTTPS 重定向
+server {
+    listen 80;
+    listen [::]:80;
+    server_name admin.seasir.top;
+
+    # 配置 HTTP 到 HTTPS 的重定向
+    return 301 https://$host$request_uri;
+}
+
+# admin.seasir.top 域名的 HTTPS 反向代理
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name admin.seasir.top;
+
+    location / {
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际后台路径
+        include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
+    }
+
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
+}
+
+# minio.seasir.top 域名的 HTTP -> HTTPS 重定向
+server {
+    listen 80;
+    listen [::]:80;
+    server_name minio.seasir.top;
+
+    # 配置 HTTP 到 HTTPS 的重定向
+    return 301 https://$host$request_uri;
+}
+
+# minio.seasir.top 域名的 HTTPS 反向代理
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name minio.seasir.top;
+
+    location / {
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际 Minio 服务
+        include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
+    }
+
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
+}
+
+# hitokoto.seasir.top 域名的 HTTP -> HTTPS 重定向
+server {
+    listen 80;
+    listen [::]:80;
+    server_name hitokoto.seasir.top;
+
+    # 配置 HTTP 到 HTTPS 的重定向
+    return 301 https://$host$request_uri;
+}
+
+# hitokoto.seasir.top 域名的 HTTPS 反向代理
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name hitokoto.seasir.top;
+
+    location / {
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际 Hitokoto 服务
+        include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
+    }
+
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
+}
+
+```
+
+
 
 ## 配置picgo
 
@@ -264,16 +388,18 @@ server {
 
   - PicGo 路径：您的PicGo软件安装路径，比如我这里是：D:\Program Files\PicGo
 
-  - 验证：点击`验证图片上传选项`，提示以下信息成功：
+    ![image-20241008000225339](https://seasir.top/images/image-20241008000225339.png)
 
+  - 验证：点击`验证图片上传选项`，提示以下信息成功：
+  
     ```txt
     验证成功
     使用以下命令测试图片上传选项:
     using http://127.0.0.1:36677/upload程序运行结果:
     {"success":true ,"result":["https ://seasir.top/images/typora-icon2.png","https://seasir.top/images/typora-icon .png"]}成功上传图片并获得新的URL
     ```
-
-    
+  
+    ![image-20241008000309984](https://seasir.top/images/image-20241008000309984.png)
 
 ## 域名解析
 
@@ -287,9 +413,3 @@ server {
 ## 图床验证💪
 
 打开Typora软件，随便截一张图黏贴，然后访问图片的地址在浏览器是否可以成功打开
-
-## 遇到的问题
-
-访问图片地址：https://seasir.top/image-20241006144259015.png会重定向到https://seasir.top/
-
-如何解决呢？

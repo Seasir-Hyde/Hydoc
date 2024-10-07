@@ -128,7 +128,7 @@ EFF news, campaigns, and ways to support digital freedom.
 
   :::tip
 
-  每次重新运行记录值会发生改变，以自己实际为准！
+  每次重新运行记录值会发生改变，以自己实际为准！`seasir.top`换成自己的主域名
 
   ```bash
   certbot -d seasir.top -d *.seasir.top --manual --config-dir config --work-dir work --logs-dir logs --preferred-challenges dns certonly
@@ -275,6 +275,7 @@ http {
 
     # 其他 server 块可以类似配置...
 }
+
 ```
 
 ### blog.conf配置文件
@@ -282,97 +283,118 @@ http {
 ecs 的 blog.conf路径：/etc/nginx/conf.d/blog.conf，配置如下：
 
 ```nginx
-# 定义一个公共的 error_page 配置
+# 全局错误页面配置
 error_page 404 /404.html;
 error_page 500 502 503 504 /50x.html;
 
-# HTTP 服务器块
+# seasir.top 域名的 HTTP -> HTTPS 重定向
 server {
-    listen 80;  # 监听 80 端口
-    server_name blog.seasir.top;  # 前台域名
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name seasir.top;
 
     # 配置 HTTP 到 HTTPS 的重定向
-    return 301 https://$host$request_uri;  # 重定向到 HTTPS
+    return 301 https://$host$request_uri;
 }
 
+# seasir.top 域名的 HTTPS 反向代理
 server {
-    listen 443 ssl;  # 监听 443 端口，启用 SSL
-    listen [::]:443 ssl;  # 支持 IPv6
-    server_name blog.seasir.top;  # 前台域名
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    server_name seasir.top;
+
+    root /root/home3.0;
 
     location / {
-        proxy_pass http://云服务器IP:8082/;  # 反向代理到实际后台路径
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际后台路径
         include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
     }
 
-    include /etc/nginx/common_configs/common_ssl_params.conf;  # 引入 SSL 公用参数
+    # 图床数据
+    location /images {
+        alias /images;
+        index index.html;
+    }
+
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
 }
 
-# 后台域名的 HTTP 服务器块
+# admin.seasir.top 域名的 HTTP -> HTTPS 重定向
 server {
-    listen 80;  # 监听 80 端口
-    server_name admin.seasir.top;  # 后台域名
+    listen 80;
+    listen [::]:80;
+    server_name admin.seasir.top;
 
     # 配置 HTTP 到 HTTPS 的重定向
-    return 301 https://$host$request_uri;  # 重定向到 HTTPS
+    return 301 https://$host$request_uri;
 }
 
+# admin.seasir.top 域名的 HTTPS 反向代理
 server {
-    listen 443 ssl;  # 监听 443 端口，启用 SSL
-    listen [::]:443 ssl;  # 支持 IPv6
-    server_name admin.seasir.top;  # 后台域名
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name admin.seasir.top;
 
     location / {
-        proxy_pass http://云服务器IP:8083/;  # 反向代理到实际后台路径
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际后台路径
         include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
     }
 
-    include /etc/nginx/common_configs/common_ssl_params.conf;  # 引入 SSL 公用参数
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
 }
 
-# Minio 域名的 HTTP 服务器块
+# minio.seasir.top 域名的 HTTP -> HTTPS 重定向
 server {
-    listen 80;  # 监听 80 端口
-    server_name minio.seasir.top;  # Minio 域名
+    listen 80;
+    listen [::]:80;
+    server_name minio.seasir.top;
 
     # 配置 HTTP 到 HTTPS 的重定向
-    return 301 https://$host$request_uri;  # 重定向到 HTTPS
+    return 301 https://$host$request_uri;
 }
 
+# minio.seasir.top 域名的 HTTPS 反向代理
 server {
-    listen 443 ssl;  # 监听 443 端口，启用 SSL
-    listen [::]:443 ssl;  # 支持 IPv6
-    server_name minio.seasir.top;  # Minio 域名
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name minio.seasir.top;
 
     location / {
-        proxy_pass http://云服务器IP:9000/;  # 反向代理到实际后台路径
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际 Minio 服务
         include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
     }
 
-    include /etc/nginx/common_configs/common_ssl_params.conf;  # 引入 SSL 公用参数
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
 }
 
-# Hitokoto 域名的 HTTP 服务器块
+# hitokoto.seasir.top 域名的 HTTP -> HTTPS 重定向
 server {
-    listen 80;  # 监听 80 端口
-    server_name hitokoto.seasir.top;  # Hitokoto 域名
+    listen 80;
+    listen [::]:80;
+    server_name hitokoto.seasir.top;
 
     # 配置 HTTP 到 HTTPS 的重定向
-    return 301 https://$host$request_uri;  # 重定向到 HTTPS
+    return 301 https://$host$request_uri;
 }
 
+# hitokoto.seasir.top 域名的 HTTPS 反向代理
 server {
-    listen 443 ssl;  # 监听 443 端口，启用 SSL
-    listen [::]:443 ssl;  # 支持 IPv6
-    server_name hitokoto.seasir.top;  # Hitokoto 域名
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name hitokoto.seasir.top;
 
     location / {
-        proxy_pass http://云服务器IP:8084/;  # 反向代理到实际后台路径
+        proxy_pass http://云服务器IP:端口/;  # 反向代理到实际 Hitokoto 服务
         include /etc/nginx/common_configs/common_proxy_params.conf;  # 引入反向代理公用参数
     }
 
-    include /etc/nginx/common_configs/common_ssl_params.conf;  # 引入 SSL 公用参数
+    # 引入 SSL 公用参数
+    include /etc/nginx/common_configs/common_ssl_params.conf;
 }
+
 ```
 
 ecs里的nginx配置目录和文件（`配置后的`）
@@ -401,3 +423,4 @@ sudo systemctl reload nginx
 ## 测试成功（24.10.5）
 
 访问：[博客前台](https://blog.seasir.top/)
+![image-20241008000628000](https://seasir.top/images/image-20241008000628000.png)
