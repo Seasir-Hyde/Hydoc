@@ -210,7 +210,7 @@ const confirmNavigation = (url: string, linkName: string) => {
 
 ### CSS样式
 
-```scss
+```css
 <style lang="scss" scoped>
 .button-container {
   display: flex;
@@ -396,7 +396,7 @@ fetchWallpaper();
 
 ### CSS样式
 
-```scss
+```css
 <style lang="scss" scoped>
 // 获取壁纸样式
 .wallpaper-container {
@@ -610,7 +610,7 @@ onMounted(() => {
 
 ### CSS样式
 
-```scss
+```css
 <style lang="scss" scoped>
 .welcome-card {
   margin: 4px;
