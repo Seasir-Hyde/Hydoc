@@ -1,13 +1,13 @@
 export type Social = {
   github?: string
-  x?: string
-  juejin?: string
-  qq?: string
-  wx?: string
+  // x?: string
+  // juejin?: string
+  // qq?: string
+  // wx?: string
   cloudmusic?: string
-  zhihu?: string
-  email?: string
-  discord?: string
+  // zhihu?: string
+  // email?: string
+  // discord?: string
   telegram?: string
   Line?: string
   messenger?: string
@@ -44,36 +44,36 @@ const socialSet: Record<keyof Social | 'rss', SocialValue> = {
     icon: 'ri:github-line',
     color: '#010409',
   },
-  juejin: {
-    href: social.juejin,
-    title: '掘金',
-    icon: 'simple-icons:juejin',
-    color: '#1E81FF',
-  },
-  x: {
-    href: social.x,
-    title: 'X',
-    icon: 'ri:twitter-x-line',
-    color: '#000',
-  },
-  wx: {
-    href: social.wx,
-    title: '微信',
-    icon: 'ri:wechat-2-line',
-    color: '#07c160',
-  },
-  zhihu: {
-    href: social.zhihu,
-    title: '知乎',
-    icon: 'ri:zhihu-line',
-    color: '#1772F6',
-  },
-  discord: {
-    href: social.discord,
-    title: 'Discord',
-    icon: 'ri:discord-line',
-    color: '#5A65F6',
-  },
+  // juejin: {
+  //   href: social.juejin,
+  //   title: '掘金',
+  //   icon: 'simple-icons:juejin',
+  //   color: '#1E81FF',
+  // },
+  // x: {
+  //   href: social.x,
+  //   title: 'X',
+  //   icon: 'ri:twitter-x-line',
+  //   color: '#000',
+  // },
+  // wx: {
+  //   href: social.wx,
+  //   title: '微信',
+  //   icon: 'ri:wechat-2-line',
+  //   color: '#07c160',
+  // },
+  // zhihu: {
+  //   href: social.zhihu,
+  //   title: '知乎',
+  //   icon: 'ri:zhihu-line',
+  //   color: '#1772F6',
+  // },
+  // discord: {
+  //   href: social.discord,
+  //   title: 'Discord',
+  //   icon: 'ri:discord-line',
+  //   color: '#5A65F6',
+  // },
   telegram: {
     href: social.telegram,
     title: 'telegram',
@@ -98,18 +98,18 @@ const socialSet: Record<keyof Social | 'rss', SocialValue> = {
     icon: 'ri-whatsapp-line',
     color: '#4dc247',
   },
-  qq: {
-    href: social.qq,
-    title: 'QQ',
-    icon: 'ri:qq-line',
-    color: '#1296db',
-  },
-  email: {
-    href: social.email,
-    title: '邮箱',
-    icon: 'ri:mail-line',
-    color: '#D44638',
-  },
+  // qq: {
+  //   href: social.qq,
+  //   title: 'QQ',
+  //   icon: 'ri:qq-line',
+  //   color: '#1296db',
+  // },
+  // email: {
+  //   href: social.email,
+  //   title: '邮箱',
+  //   icon: 'ri:mail-line',
+  //   color: '#D44638',
+  // },
   cloudmusic: {
     href: social.cloudmusic,
     title: '网易云',
