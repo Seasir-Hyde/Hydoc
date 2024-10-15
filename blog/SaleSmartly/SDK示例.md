@@ -28,14 +28,16 @@ description: 基于Vue3 构建的SDK示例组件
 image: https://resource.helplook.net/docker_production/4lsamm/icon/icon.png?rand=17935696
 
 #置顶级别，决定文章在列表中的位置
-sticky: 4
+sticky: 5
 ---
 
-基于Vue3 构建的JavaScript-Sdk示例组件
+基于Vue3 构建的SDK示例组件
 
 <!-- truncate -->
 
 
+## SDK示例网站
+[点击跳转SDK示例网站](https://soybean-admin.netlify.app)
 
 ## 打开/关闭聊天窗口组件
 
