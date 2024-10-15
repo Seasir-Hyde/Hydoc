@@ -245,8 +245,16 @@ const config: Config = {
       async: true,  // 异步加载脚本
     },
     {
-      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',  //// 看板娘
+      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',  // 看板娘
       defer: true,  // 延迟加载
+    },
+    {
+      src: 'https://cpython666.github.io/js/clickjs/fireworks.js',  //鼠标爆炸效果
+      efer: true,  // 延迟加载
+    },
+    {
+      src: 'https://cpython666.github.io/js/clickjs/anime.min.js',  //鼠标爆炸效果
+      efer: true,  // 延迟加载
     },
   ],
 
