@@ -405,10 +405,17 @@ server {
 
 添加主域名的解析记录，比如我的主域名是：seasir.top
 
-- 记录类型：A-将域名指向一个IPV4地址
-- 主机记录：@
-- 记录值：云服务器ip
+- 记录类型：CNAME
+
+- 主机记录：@和
+
+- 记录值：cnd那边的**CNAME**记录值
+
 - TTL：默认即可
+
+  ![image-20241015234226980](https://seasir.top/images/image-20241015234226980.png)
+
+  ![image-20241015234307188](https://seasir.top/images/image-20241015234307188.png)
 
 ## 图床验证💪
 
