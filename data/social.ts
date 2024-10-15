@@ -8,6 +8,10 @@ export type Social = {
   zhihu?: string
   email?: string
   discord?: string
+  telegram?: string
+  Line?: string
+  messenger?: string
+  whatsapp?: string
 }
 
 type SocialValue = {
@@ -18,15 +22,19 @@ type SocialValue = {
 }
 
 const social: Social = {
-  github: 'https://github.com/kuizuo',
-  x: 'https://twitter.com/kuizuo',
-  juejin: 'https://juejin.cn/user/1565318510545901',
-  wx: 'https://img.kuizuo.cn/wechat.png',
+  github: 'https://github.com/Seasir-Hyde/Hydoc',
+  // x: 'https://twitter.com/kuizuo',
+  // juejin: 'https://juejin.cn/user/1565318510545901',
+  // wx: 'https://img.kuizuo.cn/wechat.png',
   // qq: 'https://img.kuizuo.cn/qq.png',
   // zhihu: 'https://www.zhihu.com/people/kuizuo',
-  cloudmusic: 'https://music.163.com/#/user/home?id=1333010742',
-  email: 'mailto:hi@kuizuo.cn',
-  discord: 'https://discord.gg/M8cVcjDxkz',
+  cloudmusic: 'https://music.163.com',
+  // email: '',
+  // discord: '',
+  telegram: 'https://t.me/seasir_Bot',
+  Line: 'https://line.me/R/ti/p/@868pveei?from=page&accountId=868pveei',
+  messenger: 'https://www.facebook.com/messages/t/247347248468989',
+  whatsapp: 'https://my5353.com/XRRtp',
 }
 
 const socialSet: Record<keyof Social | 'rss', SocialValue> = {
@@ -65,6 +73,30 @@ const socialSet: Record<keyof Social | 'rss', SocialValue> = {
     title: 'Discord',
     icon: 'ri:discord-line',
     color: '#5A65F6',
+  },
+  telegram: {
+    href: social.telegram,
+    title: 'telegram',
+    icon: 'ri-telegram-2-line',
+    color: '#26a6e7',
+  },
+  Line: {
+    href: social.Line,
+    title: 'Line',
+    icon: 'ri-line-line',
+    color: '#00c300',
+  },
+  messenger: {
+    href: social.messenger,
+    title: 'messenger',
+    icon: 'ri-messenger-line',
+    color: '#ca41c7',
+  },
+  whatsapp: {
+    href: social.whatsapp,
+    title: 'whatsapp',
+    icon: 'ri-whatsapp-line',
+    color: '#4dc247',
   },
   qq: {
     href: social.qq,
