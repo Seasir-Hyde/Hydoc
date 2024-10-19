@@ -28,6 +28,56 @@ sudo yum install -y yum-utils
 
 ![image-20240811132111646](https://ice.frostsky.com/2024/08/11/387468071c1cbbcc065923f5a6b4ea2f.png)
 
+遇到的问题：
+
+```shell
+已加载插件：fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=stock error was
+14: curl#6 - "Could not resolve host: mirrorlist.centos.org; 未知的错误"
+
+
+ One of the configured repositories failed (未知),
+ and yum doesn't have enough cached data to continue. At this point the only
+ safe thing yum can do is fail. There are a few ways to work "fix" this:
+
+     1. Contact the upstream for the repository and get them to fix the problem.
+
+     2. Reconfigure the baseurl/etc. for the repository, to point to a working
+        upstream. This is most often useful if you are using a newer
+        distribution release than is supported by the repository (and the
+        packages for the previous distribution release still work).
+
+     3. Run the command with the repository temporarily disabled
+            yum --disablerepo=<repoid> ...
+
+     4. Disable the repository permanently, so yum won't use it by default. Yum
+        will then just ignore the repository until you permanently enable it
+        again or use --enablerepo for temporary usage:
+
+            yum-config-manager --disable <repoid>
+        or
+            subscription-manager repos --disable=<repoid>
+
+     5. Configure the failing repository to be skipped, if it is unavailable.
+        Note that yum will try to contact the repo. when it runs most commands,
+        so will have to try and fail each time (and thus. yum will be be much
+        slower). If it is a very temporary problem though, this is often a nice
+        compromise:
+
+            yum-config-manager --save --setopt=<repoid>.skip_if_unavailable=true
+
+Cannot find a valid baseurl for repo: base/7/x86_64
+```
+
+这个问题是由于无法解析CentOS镜像列表的主机名导致的，通常是网络问题或DNS配置不正确造成的。下载阿里云的repo文件，然后再次验证：sudo yum install -y yum-utils
+
+```shell
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+```
+
+或者参考：[linux镜像源错误](https://hydoc.netlify.app/blog/docker-linux-install)
+
 **设置阿里云镜像源**
 
 ```bash
@@ -69,9 +119,9 @@ vi  /etc/docker/daemon.json
 ```bash
 {
     "registry-mirrors": [
-        "https://mu50x193.mirror.aliyuncs.com",  //阿里云镜像加速地址
-        "https://docker.m.daocloud.io",          //daocloud镜像加速地址
-        "https://dockerhub.timeweb.cloud", 		//timeweb镜像加速地址
+        "https://mu50x193.mirror.aliyuncs.com",
+        "https://docker.m.daocloud.io",
+        "https://dockerhub.timeweb.cloud",
         "https://hub.uuuadc.top",
         "https://docker.anyhub.us.kg",
         "https://dockerhub.jobcher.com",
@@ -835,7 +885,9 @@ minio:
   accessKey: #必填！上传自己的accessKey
   #minio密钥
   secretKey: #必填！上传自己的secretKey
-  # 桶名称
+
+桶名称
+
   bucketName: blog
 ```
 </details>

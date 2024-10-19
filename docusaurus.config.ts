@@ -249,13 +249,9 @@ const config: Config = {
       defer: true,  // 延迟加载
     },
     {
-      src: 'https://cpython666.github.io/js/clickjs/fireworks.js',  //鼠标爆炸效果
-      efer: true,  // 延迟加载
-    },
-    {
-      src: 'https://cpython666.github.io/js/clickjs/anime.min.js',  //鼠标爆炸效果
-      efer: true,  // 延迟加载
-    },
+      src: 'https://mclick.netlify.app/fireworks.min.js',  //鼠标爆炸效果
+      defer: true,  // 延迟加载
+    }
   ],
 
   presets: [
