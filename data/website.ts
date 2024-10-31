@@ -79,6 +79,12 @@ export const websiteData: WebsiteCategory[] = [
         logo: 'https://linkqiu.com/images/icon/favicon.ico',
         href: 'https://linkqiu.com/',
       },
+      {
+        name: '发现导航',
+        desc: '精选实用导航网站',
+        logo: 'https://gcore.jsdelivr.net/gh/xjh22222228/nav-image@image/logo.svg',
+        href: 'https://nav3.cn/',
+      },
     ],
   },
   {
@@ -287,6 +293,13 @@ export const websiteData: WebsiteCategory[] = [
         href: 'https://convertio.co/zh/',
         tags: ['转换'],
       },
+      {
+        name: 'EditIamge',
+        desc: '压缩到指定kb/MB。',
+        logo: 'http://editimage.cn/assets/qn-0Z4EW21D.png',
+        href: 'http://editimage.cn/',
+        tags: ['图片压缩'],
+      },
     ]
   },
   {
@@ -295,7 +308,7 @@ export const websiteData: WebsiteCategory[] = [
       {
         name: 'PathFinding.js',
         desc: '一个的路径搜索的动态在线演示',
-        logo: 'http://qiao.github.io/favicon.ico',
+        logo: 'https://img1.github.io/tmp/1.jpg',
         href: 'http://qiao.github.io/PathFinding.js/visual/',
         tags: ['工具'],
       },
@@ -308,7 +321,7 @@ export const websiteData: WebsiteCategory[] = [
       {
         name: 'CMake 中文文档',
         desc: '热心网友根据官方教程翻译的文档',
-        logo: 'https://sfumecjf.github.io/favicon.ico',
+        logo: 'https://img1.github.io/tmp/4.jpg',
         href: 'https://sfumecjf.github.io/cmake-examples-Chinese/',
         tags: ['工具'],
       },
