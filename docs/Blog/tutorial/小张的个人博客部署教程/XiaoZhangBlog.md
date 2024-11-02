@@ -1,14 +1,31 @@
-<!-- ---
-id: xiaoblog
+---
+# 文档ID，唯一标识符
+id: xiao-zhang-blog
+
+# 文档的URL路径标识符，用于生成文档URL
+slug: /xiao-zhang-blog
+
+# 文档标题，显示在页面标题
 title: 小张的个人博客
-slug: /blog/xiao-zhangs-blog
-date: 2024-08-14
-authors: xxx
-description: 这是一个示例文档。
-tags: [随笔, code, backup]
-keywords: [随笔, code, backup]
-2
---- -->
+
+# 发布日期，用于时间排序
+date: 2024/11/03
+
+#用于在侧边栏中显示文档的顺序，数字越小越靠前
+sidebar_position: 1
+# 作者名称
+author: Hyde
+
+# 最后更新日期，用于时间排序
+last_update:
+  date: 2024-11-03
+
+# 关键词，用于SEO优化
+keywords: [blog ]
+
+# 文章标签，帮助分类
+tags: [blog ]
+---
 
 # 博客部署教程-宝塔面版详细版
 
@@ -48,19 +65,19 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 进入软件商店，安装Nginx、minio(Docker应用) 、MySQL、Node.js,先安装这4个
 
-![](https://ice.frostsky.com/2024/08/05/3abd5c2b5e70f7698ee72fd501e5d5b3.png)
+![3abd5c2b5e70f7698ee72fd501e5d5b3](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569785_0.png)
 
 ## 5.配置后端服务
 
 ### 5.1在根目录的 www/wwwroot 下创建文件夹 blog
 
-![image-20240717224543806](https://ice.frostsky.com/2024/08/05/921aefde711c810ab433bfdc50e9d280.png)
+![](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569857_0.png)
 
 ### 5.2复制后端文件夹到服务器
 
 使用Xftp工具将blog-server整个文件夹放在/www/wwwroot/blog路径下
 
-![image-20240717230530587](https://ice.frostsky.com/2024/08/05/1887af1ef9c30e6970ce188074af4c8f.png)
+![1887af1ef9c30e6970ce188074af4c8f](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569883_0.png)
 
 ### 5.3安装npm
 
@@ -76,7 +93,7 @@ node --version
 
 安装成功如图：
 
-![image-20240717230836234](https://ice.frostsky.com/2024/08/05/c3782d21a5188bd57783b5948c52389f.png)
+![c3782d21a5188bd57783b5948c52389f](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569930_0.png)
 
 
 
@@ -94,7 +111,7 @@ npm i
 
 去左侧安全开放后端8888端口，否则后端服务无法访问
 
-![image-20240717231416087](https://ice.frostsky.com/2024/08/05/7ae3f796628b89c1fc0342e703ba3241.png)
+![7ae3f796628b89c1fc0342e703ba3241](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569962_0.png)
 
 ## 7.mysql数据配置
 
@@ -102,17 +119,17 @@ npm i
 
 数据库名：online_blog，数据库用户和数据库密码，然后点击确定
 
-![image-20240717231655228](https://ice.frostsky.com/2024/08/05/77b7f87c256815ef8ce56aa2352f504e.png)
+![77b7f87c256815ef8ce56aa2352f504e](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730569983_0.png)
 
 ### 7.2导入数据库
 
 导入blog-server\db下面的online_blog.sql
 
-![image-20240717232109496](https://ice.frostsky.com/2024/08/05/93f3b2e69fba7a993e090fb8527cc128.png)
+![93f3b2e69fba7a993e090fb8527cc128](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570008_0.png)
 
 (有一次导入是上传文件，上传完成后还会显示上传成功的 sql 文件，还需要在那个文件右侧点击一次导入才算是导入成功)，导入过后可以重启一下 mysql，有可能会出现导入了但是数据库没重启就没生效的情况。
 
-![image-20240717232152169](https://ice.frostsky.com/2024/08/05/5d6dab8f9b1d3ee817519e5e6864fe71.png)
+![5d6dab8f9b1d3ee817519e5e6864fe71](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570034_0.png)
 
 ## 8.后端基础配置
 
@@ -198,15 +215,15 @@ minio/minio server /data \
 
 运行好以后 查看 docker 面板 会看到运行的 minio 然后打开服务器和宝塔的 9999、9000 端口进行放行 使用服务器 ip/域名 + :9999 登录
 
-![image-20240717234134299](https://ice.frostsky.com/2024/08/05/510c2dfc863e6b72a2657bd62e20f95b.png)
+![510c2dfc863e6b72a2657bd62e20f95b](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570107_0.png)
 
 登录minio
 
-![image-20240717235111105](https://ice.frostsky.com/2024/08/05/14492b01c28ff87ba488c79f56af683b.png)
+![14492b01c28ff87ba488c79f56af683b](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570164_0.png)
 
 创建桶，输入桶的名称：blog-images，桶的名称务必和我的一致 方便代理 后续熟悉了项目自己可以再修改
 
-![image-20240717234356069](https://ice.frostsky.com/2024/08/05/37981ea233fe07637b5ef2d2640e370c.png)
+![37981ea233fe07637b5ef2d2640e370c](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570170_0.png)
 
 ![img](http://mrzym.top/blog-images/GpoBaNhKRrSx)
 
@@ -216,7 +233,7 @@ minio/minio server /data \
 
 创建 Access Key好后，把 Access Key、Secret Key、桶的名称填入 .env 配置里 就可以上传了
 
-![image-20240717234813757](https://ice.frostsky.com/2024/08/05/e4172c6e0bbeab0e288859d37cc887f6.png)
+![e4172c6e0bbeab0e288859d37cc887f6](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570199_0.png)
 
 其他配置看下博主的：http://mrzym.top/#/article?id=6
 
@@ -224,7 +241,7 @@ minio/minio server /data \
 
 ### 10.1点击宝塔-网站-Node项目-添加Node项目
 
-![image-20240717235331756](https://ice.frostsky.com/2024/08/05/606659e6091bd2db214d5ad9e4ce8518.png)
+![606659e6091bd2db214d5ad9e4ce8518](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570226_0.png)
 
 ### 10.2配置node项目的基本信息，如图：![img](http://mrzym.top/blog-images/bPfmRfIXxjej)
 
@@ -234,7 +251,7 @@ minio/minio server /data \
 
 开放后端3306端口，成功启动后可以看一下项目日志，如果日志如下图
 
-![image-20240717235705249](https://ice.frostsky.com/2024/08/05/8735d0523c06286da7df77bab18a07b2.png)
+![8735d0523c06286da7df77bab18a07b2](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570279_0.png)
 
 则表明后端服务运行成功了，可以在浏览器输入服务器地址+ :端口号访问。若是出现数据库连接失败，就说明数据库账户、密码这些不对，可以去/www/wwwroot/blog/blog-server下面的.env配置里面检查
 
@@ -244,13 +261,13 @@ minio/minio server /data \
 
 11.2打包前端，使用vscode分别打开admin和blog，**前端打包前需要安装Node.js**，没有安装先去百度怎么安装。打包成功后会有dist 文件夹，使用Xftp 7将dist 整个文件夹放在/www/wwwroot/blog/blogV3/blog和/www/wwwroot/blog/blogV3/admin目录下，
 
-![image-20240718000855226](https://ice.frostsky.com/2024/08/05/171cfcbd36272c3c4f7feae8735e47af.png)
+![171cfcbd36272c3c4f7feae8735e47af](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570291_0.png)
 
 ## 12.宝塔配置NGINX
 
 在软件商店找到安装 nginx 好后(有小伙伴遇到了 nginx 下载后，启动了，但是 nginx 并没有生效的情况，可以在安装时选择编译安装就解决了)，点击配置，将我的配置复制进去就行
 
-![image-20240718001147654](https://ice.frostsky.com/2024/08/05/a1d1b2b2ecd3a271a555ba851a866f92.png)
+![a1d1b2b2ecd3a271a555ba851a866f92](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570301_0.png)
 
 记得把服务器 ip 改成你自己的！
 <details >
@@ -334,19 +351,19 @@ http {
 
     #error_page   404   /404.html;
     include enable-php.conf;
-
+    
     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
       expires 30d;
     }
-
+    
     location ~ .*\.(js|css)?$ {
       expires 12h;
     }
-
+    
     location ~ /\. {
       deny all;
     }
-
+    
     access_log /www/wwwlogs/access.log;
   }
 
@@ -366,7 +383,7 @@ http {
       alias /www/wwwroot/emoji;
       autoindex on;
     }
-
+    
     location /ws/ {
         proxy_pass http://服务器ip/:8889;
         # 后端WebSocket服务器的地址和端口
@@ -376,7 +393,7 @@ http {
         proxy_set_header Host $host; 
         proxy_cache_bypass $http_upgrade; 
     }
-
+    
     # 服务器存储图片
     location /online {
       alias /www/wwwroot/blog/blogServer/src/upload/online;
@@ -402,7 +419,7 @@ http {
       proxy_pass http://服务器ip:3000/;
     }
   }
-  
+
   server {
         listen 80;
         server_name admin.seasir.top;  #后台域名
@@ -446,7 +463,7 @@ http {
     location /blog-images {
       proxy_pass http://服务器ip:9000/blog-images;
     }
-
+    
     # 网易云音乐 代理
     location /wapi/ {
       proxy_pass http://服务器ip:3000/;
@@ -518,7 +535,7 @@ const initWebsocket = async (isReconnect = false) => {
 
 ## 1.数据库名称和密码都是对是，报错找不到ws模块解决
 
-![image-20240716002728316](https://ice.frostsky.com/2024/08/05/f4c1ac492763ccc791578284f2086671.png)
+![f4c1ac492763ccc791578284f2086671](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570436_0.png)
 
 解决 linux 下安装 node 报错： command not found：https://cloud.tencent.com/developer/article/1979850
 
@@ -532,27 +549,27 @@ node --version
 
 
 
-![image-20240716002853805](https://ice.frostsky.com/2024/08/05/460a3f7903ddfc2439aa7acc23adcb1a.png)
+![460a3f7903ddfc2439aa7acc23adcb1a](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570443_0.png)
 
 cd进入/www/wwwroot/blog/blog-server                  输入：npm i
 
-![](https://ice.frostsky.com/2024/08/05/0ad736bea60a83b91f0727b5c44f3e6a.png)
+![0ad736bea60a83b91f0727b5c44f3e6a](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570449_0.png)
 
-![image-20240716003311712](https://ice.frostsky.com/2024/08/05/f29d750ad80f48039d82aef826e7026d.png)
+![f29d750ad80f48039d82aef826e7026d](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570455_0.png)
 
-![image-20240716003120393](https://ice.frostsky.com/2024/08/05/c2275e8166cb053c2eaccdfc6f639a94.png)
+![c2275e8166cb053c2eaccdfc6f639a94](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570461_0.png)
 
 
 
 ## 2.admin后台提示报错502原因以及解决方案
 
-![image-20240716123954843](https://ice.frostsky.com/2024/08/05/6a640ea2c2df99bffbf3aa92098f1f52.png)
+![6a640ea2c2df99bffbf3aa92098f1f52](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570504_0.png)
 
 原因：nginx后端服务代理端口配置错误，改成正确的端口号，改完重启nginx服务！
 
-![image-20240716124128443](https://ice.frostsky.com/2024/08/05/6d0b59ab53f2959d2efc29ee3bea0b45.png)
+![6d0b59ab53f2959d2efc29ee3bea0b45](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570510_0.png)
 
-![image-20240716124147746](https://ice.frostsky.com/2024/08/05/516cae106ae592e5fbd8512a2b01aaa1.png)
+![516cae106ae592e5fbd8512a2b01aaa1](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570515_0.png)
 
 
 
@@ -567,7 +584,7 @@ location /gitee/ {
 }
 ```
 
-![image-20240716124352821](https://ice.frostsky.com/2024/08/05/c1a0ba9b4628ffa17454b3802e08d133.png)
+![c1a0ba9b4628ffa17454b3802e08d133](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570552_0.png)
 
 
 
@@ -575,11 +592,11 @@ location /gitee/ {
 
 原因是后端.env加上了端口，去掉即可，改成重启node后端服务
 
-![image-20240716130406365](https://ice.frostsky.com/2024/08/05/b071b407c6183a46ed407a6b3b8c2761.png)
+![b071b407c6183a46ed407a6b3b8c2761](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570615_0.png)
 
-![image-20240716130607123](https://ice.frostsky.com/2024/08/05/cc65ff7f6f0ad18e3d6c96a95027c86f.png)
+![cc65ff7f6f0ad18e3d6c96a95027c86f](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570621_0.png)
 
-![image-20240716130529679](https://ice.frostsky.com/2024/08/05/f5b00ef202daa81c77e3e9eb5719d8b0.png)
+![f5b00ef202daa81c77e3e9eb5719d8b0](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570626_0.png)
 
 
 
@@ -589,14 +606,14 @@ location /gitee/ {
 
 原因是nginx端口配置错误，访问minio页面是9999端口 访问它的图片服务是9000，改完重启后端服务
 
-![image-20240716125929914](https://ice.frostsky.com/2024/08/05/d77fa2c277ef2735370db9a4ecbbf55c.png)
+![d77fa2c277ef2735370db9a4ecbbf55c](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570677_0.png)
 
-![image-20240716125813655](https://ice.frostsky.com/2024/08/05/8d2212fa9685e324c769efe86c356b98.png)
+![8d2212fa9685e324c769efe86c356b98](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570684_0.png)
 
 ## 6.解决即时聊天获取getChatlist接口报错500问题
 
-![](https://ice.frostsky.com/2024/08/05/3107e50b95b333cb2b2b5d20a3ed5a46.png)
+![3107e50b95b333cb2b2b5d20a3ed5a46](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570692_0.png)
 
 原因是找不到这个用户id,去注册一个用户就行，或者给这个用户管理员权限；还不行的话清除聊天记录和下线，刷新网页再试试
 
-![image-20240720012342092](https://ice.frostsky.com/2024/08/05/0abb7b0e79bcce69058493fd49a004ff.png)
+![0abb7b0e79bcce69058493fd49a004ff](https://raw.githubusercontent.com/Seasir-Hyde/typora_image_uploader/main/image/1730570700_0.png)
