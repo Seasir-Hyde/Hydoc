@@ -101,21 +101,22 @@ vim docker-compose.yml
 ## 填入配置
 
 ```bash
-version: '3'
+version: '3'  # 使用Docker Compose的版本3
+
 services:
   nginx-ui:
-    image: uozi/nginx-ui:latest
-    container_name: nginx-ui
-    restart: always
+    image: uozi/nginx-ui:latest  # 使用uozi/nginx-ui镜像的最新版本
+    container_name: nginx-ui  # 容器名称为nginx-ui
+    restart: always  # 容器始终重启，以确保服务不中断
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=Asia/Shanghai  # 设置容器的时区为亚洲/上海
     volumes:
-      - /mnt/user/appdata/nginx:/etc/nginx
-      - /mnt/user/appdata/nginx-ui:/etc/nginx-ui
-      - /var/www:/var/www
+      - /mnt/user/appdata/nginx:/etc/nginx  # 将主机的nginx配置目录映射到容器的/etc/nginx
+      - /mnt/user/appdata/nginx-ui:/etc/nginx-ui  # 将主机的nginx-ui配置目录映射到容器的/etc/nginx-ui
+      - /var/www:/var/www  # 将主机的web文件目录映射到容器的/var/www
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "8080:80"  # 将主机的8080端口映射到容器的80端口，用于HTTP访问
+      - "8443:443"  # 将主机的8443端口映射到容器的443端口，用于HTTPS访问
 ```
 
 ## 运行容器
@@ -152,3 +153,30 @@ CONTAINER ID   IMAGE                                                      COMMAN
 ![image-20241111152258060](https://seasir.top/images/image-20241111152258060.png)
 
 ![image-20241111152453261](https://seasir.top/images/image-20241111152453261.png)
+
+## 常见问题
+### 1. nginx-ui容器正常运行，浏览器无法访问？
+- 检查防火墙是否开启，如果开启了，确认是否开放对应的端口或者端口被占用。
+
+- 检查docker容器日志
+```bash
+docker logs nginx-ui
+或者
+docker logs 容器id
+```
+输出：
+```bash
+Timezone: Asia/Shanghai
+nginx: [emerg] open() "/etc/nginx/nginx.conf" failed (2: No such file or directory)
+(Nginx无法找到/etc/nginx/nginx.conf配置文件)
+```
+其实这里的日志路径是错的，实际路径是`/mnt/user/appdata/nginx/nginx.conf`，对应的路径是`/root/Nginx-Ui/docker-compose.yml`文件中的`volumes`字段的路径
+```bash
+ volumes:
+      - /mnt/user/appdata/nginx:/etc/nginx  # 将主机的nginx配置目录映射到容器的/etc/nginx
+      - /mnt/user/appdata/nginx-ui:/etc/nginx-ui  # 将主机的nginx-ui配置目录映射到容器的/etc/nginx-ui
+      - /var/www:/var/www  # 将主机的web文件目录映射到容器的/var/www
+```
+解决方法：下载提供的配置文件复制替换到`/mnt/user`路径下，然后重启容器。打开浏览器可以访问了~
+
+下载地址：[点击下载](https://www.123684.com/s/nsg0Vv-IvdJv?)提取码:tA8A

@@ -76,7 +76,7 @@ async function setLoginInfo() {
         email: 'Test_Email@qq.com', // 用户邮箱
         description: '项目名称\n套餐\n套餐费用\n截至日期\n客户信息', // 用户描述信息
         label_names: ['标签值1', '标签值2'], // 用户标签，仅支持已创建的标签值
-        test: 'xiaomi' // 不n添加自定义字段，仅用于测试
+        test: 'xiaomi' // 不能添加自定义字段，仅用于测试
       });
     } else {
       console.error('ssq 未定义或者未声明--设置登录信息');
