@@ -119,21 +119,32 @@ vi  /etc/docker/daemon.json
 ```bash
 {
     "registry-mirrors": [
-        "https://mu50x193.mirror.aliyuncs.com",
-        "https://docker.m.daocloud.io",
-        "https://dockerhub.timeweb.cloud",
-        "https://hub.uuuadc.top",
-        "https://docker.anyhub.us.kg",
-        "https://dockerhub.jobcher.com",
-        "https://dockerhub.icu",
-        "https://docker.ckyl.me",
-        "https://docker.awsl9527.cn"
+    "https://mirror.ccs.tencentyun.com",
+    "https://hub.uuuadc.top",
+    "https://docker.anyhub.us.kg",
+    "https://dockerhub.jobcher.com",
+    "https://dockerhub.icu",
+    "https://docker.ckyl.me",
+    "https://docker.awsl9527.cn",
+    "https://docker.m.daocloud.io"
     ],
     "live-restore": true
 }
 ```
-
+或者
+```bash
+{
+  "registry-mirrors": [
+    "https://docker.1ms.run",
+    "https://docker.m.daocloud.io",
+    "https://docker.1panel.top"
+  ],
+    "live-restore": true
+}
+```
 镜像源地址来源于：https://blog.csdn.net/jundao1997/article/details/141756747
+
+Docker/DockerHub 国内镜像源/加速列表（长期维护 0926更新）:https://cloud.tencent.com/developer/article/2454486
 
 添加好后按下esc，然后输入:wq       退出保存
 

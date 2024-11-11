@@ -39,6 +39,74 @@ sticky: 5
 ## SDK示例网站
 [点击跳转SDK示例网站](https://soybean-admin.netlify.app)
 
+
+
+## 设置登录信息
+
+### TS代码
+
+```vue
+#salesmartly-sdk.vue
+
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { ElMessage } from 'element-plus';
+
+// 定义用户信息接口
+interface UserInfo {
+  user_id: string; // 用户 ID
+  user_name: string; // 用户名
+}
+
+// 设置登录信息函数
+async function setLoginInfo() {
+  try {
+    // 获取用户信息数组
+    const users: UserInfo[] = await mockApiGetUserInfo();
+
+    // 每次刷新时随机选择一个用户
+    const randomUser = users[Math.floor(Math.random() * users.length)];
+
+    if (window.ssq) {
+      window.ssq.push('setLoginInfo', {
+        user_id: randomUser.user_id, // 随机获取的用户 ID
+        user_name: randomUser.user_name, // 随机获取的用户名
+        language: 'en-US', // 用户语言  无法通过sdk动态获取对方浏览器语言
+        phone: '19966668888', // 用户手机号
+        email: 'Test_Email@qq.com', // 用户邮箱
+        description: '项目名称\n套餐\n套餐费用\n截至日期\n客户信息', // 用户描述信息
+        label_names: ['标签值1', '标签值2'], // 用户标签，仅支持已创建的标签值
+        test: 'xiaomi' // 不n添加自定义字段，仅用于测试
+      });
+    } else {
+      console.error('ssq 未定义或者未声明--设置登录信息');
+    }
+  } catch (error) {
+    console.error('设置登录信息时出错:', error);
+  }
+}
+
+// 模拟 API 请求，返回用户信息数组
+function mockApiGetUserInfo(): Promise<UserInfo[]> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve([
+        { user_id: 'b58e64cfxs2ym', user_name: '用户A' },
+        { user_id: 'a25d74kls9nm3w', user_name: '用户B' },
+        { user_id: 'j39d84btx8pm4x', user_name: '用户C' }
+        // 可以添加更多用户数据
+      ]);
+    }, 1000); // 模拟网络延迟1秒
+  });
+}
+
+// 页面加载时调用 setLoginInfo
+window.addEventListener('load', setLoginInfo);
+</script>
+```
+
+
+
 ## 打开/关闭聊天窗口组件
 
 ### TS代码
