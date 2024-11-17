@@ -96,14 +96,11 @@ a:hover {
 
 html,
 body {
+  font-family: misans, system-ui, -apple-system, "PingFang SC",
+    "Microsoft YaHei";
   scroll-behavior: smooth;
   height: 100vh;
   margin: 0;
-}
-
-body {
-  font-family: misans, system-ui, -apple-system, "PingFang SC",
-    "Microsoft YaHei";
 }
 
 .navbar__item {
@@ -404,7 +401,7 @@ div[class^="announcementBar_"] {
 .table-of-contents__link--active,
 .table-of-contents__link--active code {
   background-color: #00d7a8; /* 背景颜色 */
-  color: #FFF; /* 字体颜色 */
+  color: #fff; /* 字体颜色 */
 }
 
 /* 全局滚动条样式 */
@@ -512,4 +509,3 @@ div[class^="announcementBar_"] {
 [class*="backToTopButton"]::after {
   background-color: transparent !important;
 }
-

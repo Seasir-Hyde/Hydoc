@@ -142,6 +142,28 @@ vi  /etc/docker/daemon.json
     "live-restore": true
 }
 ```
+
+或者
+```bash
+ {
+  "registry-mirrors": [
+    "https://docker.m.daocloud.io", 
+    "https://noohub.ru", 
+    "https://huecker.io",
+    "https://dockerhub.timeweb.cloud",
+    "https://0c105db5188026850f80c001def654a0.mirror.swr.myhuaweicloud.com",
+    "https://5tqw56kt.mirror.aliyuncs.com",
+    "https://docker.1panel.live",
+    "http://mirrors.ustc.edu.cn/",
+    "http://mirror.azure.cn/",
+    "https://hub.rat.dev/",
+    "https://docker.ckyl.me/",
+    "https://docker.chenby.cn",
+    "https://docker.hpcloud.cloud",
+    "https://docker.m.daocloud.io"
+  ],
+  "live-restore": true
+}
 镜像源地址来源于：https://blog.csdn.net/jundao1997/article/details/141756747
 
 Docker/DockerHub 国内镜像源/加速列表（长期维护 0926更新）:https://cloud.tencent.com/developer/article/2454486

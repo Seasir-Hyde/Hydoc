@@ -25,7 +25,7 @@ keywords: [随笔, yum, install, image]
 description: 使用 yum 安装或更新软件包时，出现无法解析 mirrorlist.centos.org 主机地址的错误
 
 # 文章的封面图片
-image: https://pic.netbian.com/uploads/allimg/240622/234050-171907085047ed.jpg
+image: https://static.salesmartly.com/prod/project/fj3mnx/material/image/20241117/1731835068716/234050-171907085047ed.jpg
 
 #置顶级别，决定文章在列表中的位置
 sticky: 4

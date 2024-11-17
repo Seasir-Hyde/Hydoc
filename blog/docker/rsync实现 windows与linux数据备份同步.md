@@ -25,7 +25,7 @@ keywords: [rsync, windows, linux]
 description: rsync实现 windows与linux数据备份同步
 
 # 文章的封面图片
-image: https://pic.netbian.com/uploads/allimg/241103/175310-17306275903a59.jpg
+image: https://static.salesmartly.com/prod/project/fj3mnx/material/image/20241117/1731834999247/235418-171743005803f5.jpg
 
 #置顶级别，决定文章在列表中的位置
 sticky: 5

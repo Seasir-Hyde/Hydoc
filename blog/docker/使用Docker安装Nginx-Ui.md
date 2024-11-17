@@ -25,7 +25,7 @@ keywords: [docker, linux, Nginx]
 description: 使用Docker安装Nginx-Ui
 
 # 文章的封面图片
-image: https://nginxui.com/assets/icon.svg
+image: https://static.salesmartly.com/prod/project/fj3mnx/material/image/20241117/1731837176229/PixPin_2024-11-17_17-52-20.png
 
 #置顶级别，决定文章在列表中的位置
 sticky: 6
