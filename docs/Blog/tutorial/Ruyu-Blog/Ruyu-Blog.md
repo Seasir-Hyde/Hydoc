@@ -164,6 +164,7 @@ vi  /etc/docker/daemon.json
   ],
   "live-restore": true
 }
+```
 镜像源地址来源于：https://blog.csdn.net/jundao1997/article/details/141756747
 
 Docker/DockerHub 国内镜像源/加速列表（长期维护 0926更新）:https://cloud.tencent.com/developer/article/2454486
