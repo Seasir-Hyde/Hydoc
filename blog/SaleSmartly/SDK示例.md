@@ -779,3 +779,33 @@ onMounted(() => {
 </style>
 ```
 
+## bat脚本实现多开
+
+在桌面创建bat文件，命名为：多开脚本， 输入内容如下：
+```bat
+@echo off
+:: 提示用户输入需要打开 SaleSmartly 的数量
+set /p count=请输入需要打开 SaleSmartly桌面客户端的数量： 
+
+:: 检查输入是否为数字
+if not "%count%"=="" (
+    for /l %%i in (1,1,%count%) do (
+      // highlight-next-line
+        start "" "请替换实际需要多开应用程序路径"
+    )
+    echo 已成功启动 %count% 个 SaleSmartly 程序！
+) else (
+    echo 输入无效，请输入一个有效的数字。
+)
+
+:: 提示用户脚本执行完成并关闭窗口
+exit
+```
+另存为ANSI 编码
+
+:::tip
+
+路径示例：`D:\Program Files (x86)\SaleSmartly\SaleSmartly.exe`
+
+:::
+双击运行脚本即可
