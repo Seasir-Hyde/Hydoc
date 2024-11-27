@@ -63,23 +63,23 @@ export default function Hero() {
           <TypeIt
             getBeforeInit={(instance) => {
               instance
-                .type('烈日的太阳看不到心中的疤') // 输入初始文本
+                .type('万般努力') // 输入初始文本
                 .pause(2000) // 停顿2秒
                 .delete(12, { delay: 0 }) // 删除所有文本
                 .pause(500) // 停顿0.5秒
-                .type('夜晚的足浴城再次遇见她') // 输入新文本
+                .type('只为出人头地') // 输入新文本
                 .pause(2000) // 停顿2秒
                 .delete(11, { delay: 0 }) // 删除所有文本
                 .pause(500) // 停顿0.5秒
-                .type('工地的泥土都由我来挖') // 输入新文本
+                .type('低头弯腰') // 输入新文本
                 .pause(2000) // 停顿2秒
                 .delete(12, { delay: 0 }) // 删除前12个字符
                 .pause(500) // 停顿0.5秒
-                .type('朦胧的灯光映在了雪白的沙') // 继续添加文本
+                .type('只为爬的更高！') // 继续添加文本
                 .pause(2000) // 停顿2秒
                 .delete(12, { delay: 0 }) // 删除前12个字符
                 .pause(500) // 停顿0.5秒
-                .type('20多岁的年纪她就撑起了这个家') // 添加更多文本
+                .type('加油！屏幕前的你~') // 添加更多文本
                 .pause(2000); // 停顿2秒
               return instance; // 返回实例
             }}
